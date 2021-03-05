@@ -208,30 +208,6 @@ const SignInScreen = ({navigation}) => {
 export default SignInScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#c4ae66',
-  },
-  header: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    paddingHorizontal: 20,
-    paddingBottom: 50,
-  },
-  footer: {
-    flex: 3,
-    backgroundColor: '#fff',
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
-    paddingHorizontal: 30,
-    paddingVertical: 30,
-  },
-  text_header: {
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: 40,
-    // textAlign: 'center',
-  },
   text_header2: {
     color: 'black',
     fontWeight: 'bold',
@@ -283,5 +259,29 @@ const styles = StyleSheet.create({
   textSign: {
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#c4ae66',
+  },
+  header: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingHorizontal: 20,
+    paddingBottom: 50,
+  },
+  footer: {
+    flex: 3,
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    paddingHorizontal: 30,
+    paddingVertical: 30,
+  },
+  text_header: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 40,
+    // textAlign: 'center',
   },
 });
