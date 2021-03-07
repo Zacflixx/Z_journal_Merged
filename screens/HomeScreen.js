@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   ScrollView,
@@ -9,6 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+import auth from '@react-native-firebase/auth';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -18,7 +19,8 @@ import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 
 import {Container} from '../styles/FeedStyles';
-
+import {AuthContext} from '../navigation/AuthProvider.android';
+import {user, logout} from './ProfileScreen';
 const Posts = [
   {
     id: '1',
@@ -82,10 +84,12 @@ const Posts = [
   },
 ];
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({navigation, route}) => {
   const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [deleted, setDeleted] = useState(false);
+
+  const Myuser = user;
 
   const fetchPosts = async () => {
     try {
@@ -93,7 +97,13 @@ const HomeScreen = ({navigation}) => {
 
       await firestore()
         .collection('posts')
+
+        // user.uid ==
+        //   item.userId
+        // .where('userId', '==', userId)
+        // .where('userId', '==', users)
         .orderBy('postTime', 'desc')
+
         .get()
         .then((querySnapshot) => {
           // console.log('Total Posts: ', querySnapshot.size);
