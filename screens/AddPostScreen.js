@@ -13,6 +13,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
+import {fetchPosts} from './HomeScreen';
 
 import {
   InputField,
@@ -23,7 +24,7 @@ import {
   StatusWrapper,
 } from '../styles/AddPost';
 
-import { AuthContext } from '../navigation/AuthProvider';
+import {AuthContext} from '../navigation/AuthProvider';
 
 const AddPostScreen = () => {
   const {user, logout} = useContext(AuthContext);
@@ -63,37 +64,41 @@ const AddPostScreen = () => {
     console.log('Post: ', post);
 
     firestore()
-    .collection('posts')
-    .add({
-      userId: user.uid,
-      post: post,
-      postImg: imageUrl,
-      postTime: firestore.Timestamp.fromDate(new Date()),
-      likes: null,
-      comments: null,
-    })
-    .then(() => {
-      console.log('Post Added!');
-      Alert.alert(
-        'Post published!',
-        'Your post has been published Successfully!',
-      );
-      setPost(null);
-    })
-    .catch((error) => {
-      console.log('Something went wrong with added post to firestore.', error);
-    });
-  }
+      .collection('posts')
+      .add({
+        userId: user.uid,
+        post: post,
+        postImg: imageUrl,
+        postTime: firestore.Timestamp.fromDate(new Date()),
+        likes: null,
+        comments: null,
+      })
+      .then(() => {
+        console.log('Post Added!');
+        fetchPosts;
+        Alert.alert(
+          'Post published!',
+          'Your post has been published Successfully!',
+        );
+        setPost(null);
+      })
+      .catch((error) => {
+        console.log(
+          'Something went wrong with added post to firestore.',
+          error,
+        );
+      });
+  };
 
   const uploadImage = async () => {
-    if( image == null ) {
+    if (image == null) {
       return null;
     }
     const uploadUri = image;
     let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
 
     // Add timestamp to File Name
-    const extension = filename.split('.').pop(); 
+    const extension = filename.split('.').pop();
     const name = filename.split('.').slice(0, -1).join('.');
     filename = name + Date.now() + '.' + extension;
 
@@ -128,12 +133,10 @@ const AddPostScreen = () => {
       //   'Your image has been uploaded to the Firebase Cloud Storage Successfully!',
       // );
       return url;
-
     } catch (e) {
       console.log(e);
       return null;
     }
-
   };
 
   return (

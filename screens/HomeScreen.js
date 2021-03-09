@@ -20,7 +20,7 @@ import firestore from '@react-native-firebase/firestore';
 
 import {Container} from '../styles/FeedStyles';
 import {AuthContext} from '../navigation/AuthProvider.android';
-import {user, logout} from './ProfileScreen';
+import {user, logout, ProfileScreen} from './ProfileScreen';
 const Posts = [
   {
     id: '1',
@@ -89,8 +89,6 @@ const HomeScreen = ({navigation, route}) => {
   const [loading, setLoading] = useState(true);
   const [deleted, setDeleted] = useState(false);
 
-  const Myuser = user;
-
   const fetchPosts = async () => {
     try {
       const list = [];
@@ -101,9 +99,8 @@ const HomeScreen = ({navigation, route}) => {
         // user.uid ==
         //   item.userId
         // .where('userId', '==', userId)
-        // .where('userId', '==', users)
+        // .where('userId', '==', route.params ? route.params.userId : user.uid)
         .orderBy('postTime', 'desc')
-
         .get()
         .then((querySnapshot) => {
           // console.log('Total Posts: ', querySnapshot.size);
