@@ -29,25 +29,6 @@ const PostCard = ({item, onDelete, onPress}) => {
   const {user, logout} = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
 
-  likeIcon = item.liked ? 'heart' : 'heart-outline';
-  likeIconColor = item.liked ? '#2e64e5' : '#333';
-
-  if (item.likes == 1) {
-    likeText = '1 Like';
-  } else if (item.likes > 1) {
-    likeText = item.likes + ' Likes';
-  } else {
-    likeText = 'Like';
-  }
-
-  if (item.comments == 1) {
-    commentText = '1 Comment';
-  } else if (item.comments > 1) {
-    commentText = item.comments + ' Comments';
-  } else {
-    commentText = 'Comment';
-  }
-
   const getUser = async () => {
     await firestore()
       .collection('users')
@@ -66,51 +47,51 @@ const PostCard = ({item, onDelete, onPress}) => {
   }, []);
 
   return (
-    <Card key={item.id}>
+    <Card key={item.id} style={{backgroundColor: 'black'}}>
       <UserInfo>
         <UserImg
           source={{
             uri: userData
               ? userData.userImg ||
-                'https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg'
-              : 'https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg',
+                'https://png.pngitem.com/pimgs/s/168-1689599_male-user-filled-icon-user-icon-100-x.png'
+              : 'https://png.pngitem.com/pimgs/s/168-1689599_male-user-filled-icon-user-icon-100-x.png',
           }}
         />
-        <UserInfoText>
+        <UserInfoText style={{color: 'white'}}>
           <TouchableOpacity onPress={onPress}>
-            <UserName>
-              {userData ? userData.fname || 'Test' : 'Test'}{' '}
+            <UserName style={{color: 'white'}}>
+              {userData ? userData.fname || 'Z-Journal' : 'Z-Journal'}{' '}
               {userData ? userData.lname || 'User' : 'User'}
             </UserName>
           </TouchableOpacity>
           <PostTime>{moment(item.postTime.toDate()).fromNow()}</PostTime>
         </UserInfoText>
       </UserInfo>
-      <PostText>{item.post}</PostText>
+      <PostText style={{color: 'white'}}>{item.post}</PostText>
       {/* {item.postImg != null ? <PostImg source={{uri: item.postImg}} /> : <Divider />} */}
       {item.postImg != null ? (
         <ProgressiveImage
           defaultImageSource={require('../assets/default-img.jpg')}
           source={{uri: item.postImg}}
-          style={{width: '100%', height: 250}}
-          resizeMode="cover"
+          style={{width: 300, height: 200}}
+          resizeMode="contain"
         />
       ) : (
         <Divider />
       )}
 
       <InteractionWrapper>
-        <Interaction active={item.liked}>
+        {/* <Interaction active={item.liked}>
           <Ionicons name={likeIcon} size={25} color={likeIconColor} />
           <InteractionText active={item.liked}>{likeText}</InteractionText>
-        </Interaction>
-        <Interaction>
+        </Interaction> */}
+        {/* <Interaction>
           <Ionicons name="md-chatbubble-outline" size={25} />
           <InteractionText>{commentText}</InteractionText>
-        </Interaction>
+        </Interaction> */}
         {user.uid == item.userId ? (
           <Interaction onPress={() => onDelete(item.id)}>
-            <Ionicons name="md-trash-bin" size={25} />
+            <Ionicons name="md-trash-bin" size={25} color="white" />
           </Interaction>
         ) : null}
       </InteractionWrapper>

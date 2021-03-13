@@ -10,14 +10,10 @@ import {
 } from 'react-native';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import auth from '@react-native-firebase/auth';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
 import PostCard from '../components/PostCard';
-
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
-
 import {Container} from '../styles/FeedStyles';
 import {AuthContext} from '../navigation/AuthProvider.android';
 import {user, logout, ProfileScreen} from './ProfileScreen';
@@ -237,17 +233,9 @@ const HomeScreen = ({navigation, route}) => {
               </View>
             </View>
             <View style={{marginTop: 10, marginBottom: 30}}>
+              <View style={{width: 300, height: 20, borderRadius: 4}} />
               <View
-                style={{width: 300, height: 20, borderRadius: 4, color: red}}
-              />
-              <View
-                style={{
-                  marginTop: 6,
-                  width: 250,
-                  height: 20,
-                  borderRadius: 4,
-                  color: red,
-                }}
+                style={{marginTop: 6, width: 250, height: 20, borderRadius: 4}}
               />
               <View
                 style={{marginTop: 6, width: 350, height: 200, borderRadius: 4}}
@@ -276,7 +264,7 @@ const HomeScreen = ({navigation, route}) => {
           </SkeletonPlaceholder>
         </ScrollView>
       ) : (
-        <Container style={{backgroundColor: 'yellow'}}>
+        <Container>
           <FlatList
             data={posts}
             renderItem={({item}) => (

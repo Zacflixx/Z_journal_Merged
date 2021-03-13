@@ -26,7 +26,7 @@ import {
 
 import {AuthContext} from '../navigation/AuthProvider';
 
-const AddPostScreen = () => {
+const AddPostScreen = (navigation) => {
   const {user, logout} = useContext(AuthContext);
 
   const [image, setImage] = useState(null);
@@ -88,6 +88,7 @@ const AddPostScreen = () => {
           error,
         );
       });
+    navigation.navigate('Zac Social');
   };
 
   const uploadImage = async () => {
@@ -157,7 +158,7 @@ const AddPostScreen = () => {
             <ActivityIndicator size="large" color="#0000ff" />
           </StatusWrapper>
         ) : (
-          <SubmitBtn onPress={submitPost}>
+          <SubmitBtn onPress={submitPost()}>
             <SubmitBtnText>Post</SubmitBtnText>
           </SubmitBtn>
         )}
