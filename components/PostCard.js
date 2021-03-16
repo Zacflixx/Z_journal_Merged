@@ -47,7 +47,13 @@ const PostCard = ({item, onDelete, onPress}) => {
   }, []);
 
   return (
-    <Card key={item.id} style={{backgroundColor: 'black'}}>
+    <Card
+      key={item.id}
+      style={{
+        backgroundColor: '#191919',
+        borderWidth: 4,
+        borderColor: '#d4b057',
+      }}>
       <UserInfo>
         <UserImg
           source={{
@@ -57,9 +63,9 @@ const PostCard = ({item, onDelete, onPress}) => {
               : 'https://png.pngitem.com/pimgs/s/168-1689599_male-user-filled-icon-user-icon-100-x.png',
           }}
         />
-        <UserInfoText style={{color: 'white'}}>
+        <UserInfoText style={{color: 'black'}}>
           <TouchableOpacity onPress={onPress}>
-            <UserName style={{color: 'white'}}>
+            <UserName style={{color: 'black'}}>
               {userData ? userData.fname || 'Z-Journal' : 'Z-Journal'}{' '}
               {userData ? userData.lname || 'User' : 'User'}
             </UserName>
@@ -67,7 +73,7 @@ const PostCard = ({item, onDelete, onPress}) => {
           <PostTime>{moment(item.postTime.toDate()).fromNow()}</PostTime>
         </UserInfoText>
       </UserInfo>
-      <PostText style={{color: 'white'}}>{item.post}</PostText>
+      <PostText style={{color: '#d4b057'}}>{item.post}</PostText>
       {/* {item.postImg != null ? <PostImg source={{uri: item.postImg}} /> : <Divider />} */}
       {item.postImg != null ? (
         <ProgressiveImage
@@ -91,7 +97,7 @@ const PostCard = ({item, onDelete, onPress}) => {
         </Interaction> */}
         {user.uid == item.userId ? (
           <Interaction onPress={() => onDelete(item.id)}>
-            <Ionicons name="md-trash-bin" size={25} color="white" />
+            <Ionicons name="md-trash-bin" size={25} color="#d4b057" />
           </Interaction>
         ) : null}
       </InteractionWrapper>
