@@ -7,6 +7,8 @@ import {
   FlatList,
   SafeAreaView,
   Alert,
+  StatusBar,
+  numColumns,
 } from 'react-native';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import auth from '@react-native-firebase/auth';
@@ -238,7 +240,7 @@ const HomeScreen = ({navigation, route}) => {
             </View>
             <View style={{marginTop: 10, marginBottom: 30}}>
               <View
-                style={{width: 300, height: 20, borderRadius: 4, color: red}}
+                style={{width: 300, height: 20, borderRadius: 4, color: 'red'}}
               />
               <View
                 style={{
@@ -246,7 +248,7 @@ const HomeScreen = ({navigation, route}) => {
                   width: 250,
                   height: 20,
                   borderRadius: 4,
-                  color: red,
+                  color: 'red',
                 }}
               />
               <View
@@ -276,7 +278,13 @@ const HomeScreen = ({navigation, route}) => {
           </SkeletonPlaceholder>
         </ScrollView>
       ) : (
-        <Container style={{backgroundColor: 'yellow'}}>
+        <Container
+          style={{
+            backgroundColor: '#c4ae66',
+            borderColor: '#4d462c',
+            borderWidth: 2,
+          }}>
+          <StatusBar backgroundColor="black" barStyle="light-content" />
           <FlatList
             data={posts}
             renderItem={({item}) => (
@@ -288,6 +296,9 @@ const HomeScreen = ({navigation, route}) => {
                 }
               />
             )}
+            numColumns={2}
+            key={2}
+            style={{width: '50%'}}
             keyExtractor={(item) => item.id}
             ListHeaderComponent={ListHeader}
             ListFooterComponent={ListHeader}
