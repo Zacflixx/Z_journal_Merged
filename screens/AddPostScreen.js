@@ -13,7 +13,6 @@ import ImagePicker from 'react-native-image-crop-picker';
 
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
-import {fetchPosts} from './HomeScreen';
 
 import {
   InputField,
@@ -26,7 +25,7 @@ import {
 
 import {AuthContext} from '../navigation/AuthProvider';
 
-const AddPostScreen = (navigation) => {
+const AddPostScreen = () => {
   const {user, logout} = useContext(AuthContext);
 
   const [image, setImage] = useState(null);

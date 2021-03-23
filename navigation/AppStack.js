@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator();
 const FeedStack = ({navigation}) => (
   <Stack.Navigator>
     <Stack.Screen
-      name="Zac Social"
+      name="Z~Journal"
       component={HomeScreen}
       options={{
         headerTitleAlign: 'center',
@@ -32,7 +32,7 @@ const FeedStack = ({navigation}) => (
         headerStyle: {
           shadowColor: '#fff',
           elevation: 0,
-          backgroundColor: '#d4b057',
+          backgroundColor: '#c4ae66',
         },
         headerRight: () => (
           <View style={{marginRight: 10}}>
@@ -145,7 +145,7 @@ const AppStack = () => {
       tabBarOptions={{
         activeTintColor: '#d4b057',
         activeBackgroundColor: 'black',
-        inactiveBackgroundColor: '#d4b057',
+        inactiveBackgroundColor: '#c4ae66',
         inactiveTintColor: 'black',
       }}>
       <Tab.Screen

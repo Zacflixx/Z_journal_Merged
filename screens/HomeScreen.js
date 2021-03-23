@@ -85,11 +85,19 @@ const Posts = [
     comments: '0',
   },
 ];
+// const data1 = [{key: '1'}, {key: '2'}, {key: '3'}, {key: '4'}, {key: '5'}];
+// renderItem = ({item, index}) => {
+//   return;
+//   <View>
+//     <Text>{item.key}</Text>
+//   </View>;
+// };
 
 const HomeScreen = ({navigation, route}) => {
   const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [deleted, setDeleted] = useState(false);
+  const numColumns = 2;
 
   const fetchPosts = async () => {
     try {
@@ -222,6 +230,7 @@ const HomeScreen = ({navigation, route}) => {
   const ListHeader = () => {
     return null;
   };
+
   return (
     <SafeAreaView style={{flex: 1}}>
       {loading ? (
@@ -280,9 +289,13 @@ const HomeScreen = ({navigation, route}) => {
       ) : (
         <Container
           style={{
-            backgroundColor: '#c4ae66',
-            borderColor: '#4d462c',
-            borderWidth: 2,
+            backgroundColor: '#29261d',
+            borderColor: '#292417',
+            borderWidth: 3,
+            borderRadius: 4,
+            flex: 1,
+
+            // flexDirection: 'row',
           }}>
           <StatusBar backgroundColor="black" barStyle="light-content" />
           <FlatList
@@ -296,14 +309,19 @@ const HomeScreen = ({navigation, route}) => {
                 }
               />
             )}
-            numColumns={2}
-            key={2}
-            style={{width: '50%'}}
+            numColumns={numColumns}
+            style={{flex: 1, height: '20%'}}
             keyExtractor={(item) => item.id}
-            ListHeaderComponent={ListHeader}
-            ListFooterComponent={ListHeader}
+            // ListHeaderComponent={ListHeader}
+            // ListFooterComponent={ListHeader}
             showsVerticalScrollIndicator={false}
           />
+
+          {/* <FlatList
+            data={data1}
+            renderItem={this.renderItem}
+            keyExtractor={(item, index) => index.toString()}
+          /> */}
         </Container>
       )}
     </SafeAreaView>

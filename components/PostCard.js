@@ -50,11 +50,14 @@ const PostCard = ({item, onDelete, onPress}) => {
     <Card
       key={item.id}
       style={{
-        backgroundColor: '#827139',
+        backgroundColor: '#a3935d',
         borderWidth: 3,
-        borderColor: '#4d462c',
+        borderColor: '#3b3119',
+        borderRadius: 20,
+        width: '50%',
+        height: 190,
       }}>
-      <UserInfo>
+      <UserInfo style={{}}>
         <UserImg
           source={{
             uri: userData
@@ -73,19 +76,19 @@ const PostCard = ({item, onDelete, onPress}) => {
           <PostTime>{moment(item.postTime.toDate()).fromNow()}</PostTime>
         </UserInfoText>
       </UserInfo>
-      <PostText style={{color: '#b09553'}}>{item.post}</PostText>
-      {/* {item.postImg != null ? <PostImg source={{uri: item.postImg}} /> : <Divider />} */}
+      <PostText style={{color: '#fffdf7'}}>{item.post}</PostText>
+      {/* {item.postImg != null ? <PostImg source={{uri: item.postImg}} /> : */}
+      <Divider />
       {item.postImg != null ? (
         <ProgressiveImage
           defaultImageSource={require('../assets/default-img.jpg')}
           source={{uri: item.postImg}}
-          style={{width: 100, height: 50}}
+          style={{width: '100%', height: 120}}
           resizeMode="contain"
         />
       ) : (
         <Divider />
       )}
-
       <InteractionWrapper>
         {/* <Interaction active={item.liked}>
           <Ionicons name={likeIcon} size={25} color={likeIconColor} />
