@@ -26,6 +26,9 @@ const FeedStack = ({navigation}) => (
         headerTitleStyle: {
           color: 'black',
           //   backgroundColor: '#fff',
+          //   color: '#fff',
+          //   borderColor: '#fff',
+          //   borderRadius: 12,
           fontFamily: 'Kufam-SemiBoldItalic',
           fontSize: 18,
         },

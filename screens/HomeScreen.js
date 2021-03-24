@@ -310,7 +310,7 @@ const HomeScreen = ({navigation, route}) => {
               />
             )}
             numColumns={numColumns}
-            style={{flex: 1, height: '20%'}}
+            style={{flex: 1, height: '20%', marginTop: 30}}
             keyExtractor={(item) => item.id}
             // ListHeaderComponent={ListHeader}
             // ListFooterComponent={ListHeader}
