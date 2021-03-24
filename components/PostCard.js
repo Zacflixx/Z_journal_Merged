@@ -47,6 +47,7 @@ const PostCard = ({item, onDelete, onPress}) => {
   }, []);
 
   return (
+    //start of the card editing code
     <Card
       key={item.id}
       style={{

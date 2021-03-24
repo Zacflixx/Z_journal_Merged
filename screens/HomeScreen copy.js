@@ -206,7 +206,7 @@ const HomeScreen = ({navigation, route}) => {
       .then(() => {
         Alert.alert(
           'Post deleted!',
-          'Your post has been deleted successfully!',
+          'Your post has been deleted successfully! this is just log',
         );
         setDeleted(true);
       })
