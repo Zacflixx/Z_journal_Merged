@@ -141,6 +141,17 @@ const AddPostScreen = () => {
 
   return (
     <View style={styles.container}>
+      {/* <Text
+        style={{
+          paddingTop: 10,
+          alignSelf: 'center',
+          color: '#0063B2FF',
+          fontSize: 26,
+          fontWeight: 'bold',
+          paddingBottom: 10,
+        }}>
+        Add to your Z-Journal
+      </Text> */}
       <InputWrapper>
         {image != null ? <AddImage source={{uri: image}} /> : null}
 
@@ -150,19 +161,20 @@ const AddPostScreen = () => {
           numberOfLines={4}
           value={post}
           onChangeText={(content) => setPost(content)}
+          style={{
+            borderColor: '#0063B2FF',
+            borderWidth: 5,
+            borderRadius: 40,
+          }}
         />
-        {uploading ? (
-          <StatusWrapper>
-            <Text>{transferred} % Completed!</Text>
-            <ActivityIndicator size="large" color="#0000ff" />
-          </StatusWrapper>
-        ) : (
-          <SubmitBtn onPress={submitPost()}>
-            <SubmitBtnText>Post</SubmitBtnText>
-          </SubmitBtn>
-        )}
       </InputWrapper>
-      <ActionButton buttonColor="#2e64e5">
+
+      <ActionButton
+        buttonColor="#2e64e5"
+        style={{
+          marginBottom: 190,
+          marginRight: 250,
+        }}>
         <ActionButton.Item
           buttonColor="#9b59b6"
           title="Take Photo"
@@ -176,6 +188,17 @@ const AddPostScreen = () => {
           <Icon name="md-images-outline" style={styles.actionButtonIcon} />
         </ActionButton.Item>
       </ActionButton>
+
+      {uploading ? (
+        <StatusWrapper>
+          <Text>{transferred} % Completed!</Text>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </StatusWrapper>
+      ) : (
+        <SubmitBtn onPress={submitPost()}>
+          <SubmitBtnText>Post</SubmitBtnText>
+        </SubmitBtn>
+      )}
     </View>
   );
 };
@@ -187,9 +210,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#99a6ba',
   },
   actionButtonIcon: {
-    fontSize: 20,
+    fontSize: 28,
     height: 22,
     color: 'white',
   },

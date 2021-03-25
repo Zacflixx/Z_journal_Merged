@@ -35,7 +35,7 @@ const FeedStack = ({navigation}) => (
         headerStyle: {
           shadowColor: '#fff',
           elevation: 0,
-          backgroundColor: '#c4ae66',
+          backgroundColor: '#0063B2FF',
         },
         headerRight: () => (
           <View style={{marginRight: 10}}>
@@ -43,7 +43,7 @@ const FeedStack = ({navigation}) => (
               name="plus"
               size={25}
               backgroundColor="black"
-              color="#d4b057"
+              color="#0063B2FF"
               onPress={() => navigation.navigate('AddPost')}
             />
           </View>
@@ -91,16 +91,28 @@ const FeedStack = ({navigation}) => (
   </Stack.Navigator>
 );
 
-const MessageStack = ({navigation}) => (
+const AddPostStack = ({navigation}) => (
   <Stack.Navigator>
-    <Stack.Screen name="Messages" component={MessagesScreen} />
     <Stack.Screen
-      name="Chat"
-      component={ChatScreen}
-      options={({route}) => ({
-        title: route.params.userName,
-        headerBackTitleVisible: false,
-      })}
+      name="Add to your Z-Journal"
+      component={AddPostScreen}
+      options={{
+        headerTitleAlign: 'center',
+        headerTitleStyle: {
+          color: 'black',
+          //   backgroundColor: '#fff',
+          //   color: '#fff',
+          //   borderColor: '#fff',
+          //   borderRadius: 12,
+          fontFamily: 'Kufam-SemiBoldItalic',
+          fontSize: 18,
+        },
+        headerStyle: {
+          shadowColor: '#fff',
+          elevation: 0,
+          backgroundColor: '#0063B2FF',
+        },
+      }}
     />
   </Stack.Navigator>
 );
@@ -146,9 +158,9 @@ const AppStack = () => {
   return (
     <Tab.Navigator
       tabBarOptions={{
-        activeTintColor: '#d4b057',
+        activeTintColor: '#0063B2FF',
         activeBackgroundColor: 'black',
-        inactiveBackgroundColor: '#c4ae66',
+        inactiveBackgroundColor: '#0063B2FF',
         inactiveTintColor: 'black',
       }}>
       <Tab.Screen
@@ -167,8 +179,8 @@ const AppStack = () => {
         })}
       />
       <Tab.Screen
-        name="Messages"
-        component={MessageStack}
+        name="Add Journal"
+        component={AddPostStack}
         options={({route}) => ({
           tabBarVisible: getTabBarVisibility(route),
           // Or Hide tabbar when push!

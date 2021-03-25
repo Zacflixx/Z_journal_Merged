@@ -51,12 +51,13 @@ const PostCard = ({item, onDelete, onPress}) => {
     <Card
       key={item.id}
       style={{
-        backgroundColor: '#a3935d',
+        backgroundColor: '#0063B2FF',
         borderWidth: 3,
-        borderColor: '#3b3119',
+        borderColor: '#4c6387',
         borderRadius: 20,
         width: '50%',
         height: 190,
+        opacity: 0.9,
       }}>
       <UserInfo style={{}}>
         <UserImg
