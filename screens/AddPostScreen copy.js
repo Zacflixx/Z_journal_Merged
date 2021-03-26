@@ -139,6 +139,17 @@ const AddPostScreen = () => {
 
   return (
     <View style={styles.container}>
+      {/* <Text
+        style={{
+          paddingTop: 10,
+          alignSelf: 'center',
+          color: '#0063B2FF',
+          fontSize: 26,
+          fontWeight: 'bold',
+          paddingBottom: 10,
+        }}>
+        Add to your Z-Journal
+      </Text> */}
       <InputWrapper>
         {image != null ? <AddImage source={{uri: image}} /> : null}
 
@@ -154,18 +165,14 @@ const AddPostScreen = () => {
             borderRadius: 40,
           }}
         />
-        {uploading ? (
-          <StatusWrapper>
-            <Text>{transferred} % Completed!</Text>
-            <ActivityIndicator size="large" color="#0000ff" />
-          </StatusWrapper>
-        ) : (
-          <SubmitBtn onPress={submitPost}>
-            <SubmitBtnText>Post</SubmitBtnText>
-          </SubmitBtn>
-        )}
       </InputWrapper>
-      <ActionButton buttonColor="#2e64e5">
+
+      <ActionButton
+        buttonColor="#2e64e5"
+        style={{
+          marginBottom: 190,
+          marginRight: 250,
+        }}>
         <ActionButton.Item
           buttonColor="#9b59b6"
           title="Take Photo"
@@ -179,11 +186,23 @@ const AddPostScreen = () => {
           <Icon name="md-images-outline" style={styles.actionButtonIcon} />
         </ActionButton.Item>
       </ActionButton>
+
+      {uploading ? (
+        <StatusWrapper>
+          <Text>{transferred} % Completed!</Text>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </StatusWrapper>
+      ) : (
+        <SubmitBtn onPress={submitPost()}>
+          <SubmitBtnText>Post</SubmitBtnText>
+        </SubmitBtn>
+      )}
     </View>
   );
 };
 
 export default AddPostScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

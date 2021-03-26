@@ -1,42 +1,27 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
-  ScrollView,
   Text,
+  Image,
+  TouchableOpacity,
   StyleSheet,
-  FlatList,
+  ScrollView,
   SafeAreaView,
   Alert,
-  StatusBar,
-  numColumns,
 } from 'react-native';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import auth from '@react-native-firebase/auth';
+import FormButton from '../components/FormButton';
+import {AuthContext} from '../navigation/AuthProvider';
 
-import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import firestore from '@react-native-firebase/firestore';
 import PostCard from '../components/PostCard';
 
-import storage from '@react-native-firebase/storage';
-import firestore from '@react-native-firebase/firestore';
+const ProfileScreen = ({navigation, route}) => {
+  const {user, logout} = useContext(AuthContext);
 
-import {Container} from '../styles/FeedStyles';
-import {AuthContext} from '../navigation/AuthProvider.android';
-import {user, logout, ProfileScreen} from './ProfileScreen';
-
-// const data1 = [{key: '1'}, {key: '2'}, {key: '3'}, {key: '4'}, {key: '5'}];
-// renderItem = ({item, index}) => {
-//   return;
-//   <View>
-//     <Text>{item.key}</Text>
-//   </View>;
-// };
-
-const HomeScreen = ({navigation, route}) => {
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleted, setDeleted] = useState(false);
-  const numColumns = 2;
+  const [userData, setUserData] = useState(null);
 
   const fetchPosts = async () => {
     try {
@@ -44,11 +29,7 @@ const HomeScreen = ({navigation, route}) => {
 
       await firestore()
         .collection('posts')
-
-        // user.uid ==
-        //   item.userId
-        // .where('userId', '==', userId)
-        // .where('userId', '==', route.params ? route.params.userId : user.uid)
+        .where('userId', '==', route.params ? route.params.userId : user.uid)
         .orderBy('postTime', 'desc')
         .get()
         .then((querySnapshot) => {
@@ -91,14 +72,24 @@ const HomeScreen = ({navigation, route}) => {
     }
   };
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  const getUser = async () => {
+    await firestore()
+      .collection('users')
+      .doc(route.params ? route.params.userId : user.uid)
+      .get()
+      .then((documentSnapshot) => {
+        if (documentSnapshot.exists) {
+          console.log('User Data', documentSnapshot.data());
+          setUserData(documentSnapshot.data());
+        }
+      });
+  };
 
   useEffect(() => {
+    getUser();
     fetchPosts();
-    setDeleted(false);
-  }, [deleted]);
+    navigation.addListener('focus', () => setLoading(!loading));
+  }, [navigation, loading]);
 
   const handleDelete = (postId) => {
     Alert.alert(
@@ -118,7 +109,6 @@ const HomeScreen = ({navigation, route}) => {
       {cancelable: false},
     );
   };
-
   const deletePost = (postId) => {
     console.log('Current Post Id: ', postId);
 
@@ -166,105 +156,91 @@ const HomeScreen = ({navigation, route}) => {
       .catch((e) => console.log('Error deleting posst.', e));
   };
 
-  const ListHeader = () => {
-    return null;
-  };
-
   return (
-    <SafeAreaView style={{flex: 1}}>
-      {loading ? (
-        <ScrollView
-          style={{flex: 1}}
-          contentContainerStyle={{alignItems: 'center'}}>
-          <SkeletonPlaceholder>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <View style={{width: 60, height: 60, borderRadius: 50}} />
-              <View style={{marginLeft: 20}}>
-                <View style={{width: 120, height: 20, borderRadius: 4}} />
-                <View
-                  style={{marginTop: 6, width: 80, height: 20, borderRadius: 4}}
-                />
-              </View>
-            </View>
-            <View style={{marginTop: 10, marginBottom: 30}}>
-              <View
-                style={{width: 300, height: 20, borderRadius: 4, color: 'red'}}
-              />
-              <View
-                style={{
-                  marginTop: 6,
-                  width: 250,
-                  height: 20,
-                  borderRadius: 4,
-                  color: 'red',
-                }}
-              />
-              <View
-                style={{marginTop: 6, width: 350, height: 200, borderRadius: 4}}
-              />
-            </View>
-          </SkeletonPlaceholder>
-          <SkeletonPlaceholder>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <View style={{width: 60, height: 60, borderRadius: 50}} />
-              <View style={{marginLeft: 20}}>
-                <View style={{width: 120, height: 20, borderRadius: 4}} />
-                <View
-                  style={{marginTop: 6, width: 80, height: 20, borderRadius: 4}}
-                />
-              </View>
-            </View>
-            <View style={{marginTop: 10, marginBottom: 30}}>
-              <View style={{width: 300, height: 20, borderRadius: 4}} />
-              <View
-                style={{marginTop: 6, width: 250, height: 20, borderRadius: 4}}
-              />
-              <View
-                style={{marginTop: 6, width: 350, height: 200, borderRadius: 4}}
-              />
-            </View>
-          </SkeletonPlaceholder>
-        </ScrollView>
-      ) : (
-        <Container
-          style={{
-            backgroundColor: '#282e38',
-            borderColor: '#292417',
-            borderWidth: 3,
-            borderRadius: 4,
-            flex: 1,
-
-            // flexDirection: 'row',
-          }}>
-          <StatusBar backgroundColor="black" barStyle="light-content" />
-          <FlatList
-            data={posts}
-            renderItem={({item}) => (
-              <PostCard
-                item={item}
-                onDelete={handleDelete}
-                onPress={() =>
-                  navigation.navigate('HomeProfile', {userId: item.userId})
-                }
-              />
-            )}
-            numColumns={numColumns}
-            style={{flex: 1, height: '20%', marginTop: 30}}
-            keyExtractor={(item) => item.id}
-            // ListHeaderComponent={ListHeader}
-            // ListFooterComponent={ListHeader}
-            showsVerticalScrollIndicator={false}
-          />
-
-          {/* <FlatList
-            data={data1}
-            renderItem={this.renderItem}
-            keyExtractor={(item, index) => index.toString()}
-          /> */}
-        </Container>
-      )}
+    <SafeAreaView style={{flex: 1, backgroundColor: '#282e38', paddingTop: 3}}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+        }}
+        showsVerticalScrollIndicator={false}>
+        {posts.map((item) => (
+          <PostCard key={item.id} item={item} onDelete={handleDelete} />
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default HomeScreen;
+export default ProfileScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#282e38',
+    borderColor: 'black',
+    borderWidth: 4,
+    paddingRight: 17,
+    paddingLeft: 17,
+    paddingTop: 17,
+    flexDirection: 'column',
+  },
+  userImg: {
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+  },
+  userName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  aboutUser: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#666',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  userBtnWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '100%',
+    marginBottom: 10,
+  },
+  userBtn: {
+    borderColor: '#2e64e5',
+    borderWidth: 2,
+    borderRadius: 3,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginHorizontal: 5,
+  },
+  userBtnTxt: {
+    color: '#2e64e5',
+  },
+  userInfoWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    marginVertical: 20,
+  },
+  userInfoItem: {
+    justifyContent: 'center',
+  },
+  userInfoTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    textAlign: 'center',
+  },
+  userInfoSubTitle: {
+    fontSize: 12,
+    color: '#666',
+    textAlign: 'center',
+  },
+});
