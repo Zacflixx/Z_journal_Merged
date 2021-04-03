@@ -35,7 +35,7 @@ const FeedStack = ({navigation}) => (
         headerStyle: {
           shadowColor: '#fff',
           elevation: 0,
-          backgroundColor: '#0063B2FF',
+          backgroundColor: '#c4ae66',
         },
         headerRight: () => (
           <View style={{marginRight: 10}}>
@@ -43,7 +43,7 @@ const FeedStack = ({navigation}) => (
               name="plus"
               size={25}
               backgroundColor="black"
-              color="#0063B2FF"
+              color="#c4ae66"
               onPress={() => navigation.navigate('AddPost')}
             />
           </View>
@@ -110,7 +110,7 @@ const AddPostStack = ({navigation}) => (
         headerStyle: {
           shadowColor: '#fff',
           elevation: 0,
-          backgroundColor: '#0063B2FF',
+          backgroundColor: '#c4ae66',
         },
       }}
     />
@@ -158,9 +158,9 @@ const AppStack = () => {
   return (
     <Tab.Navigator
       tabBarOptions={{
-        activeTintColor: '#0063B2FF',
+        activeTintColor: '#c4ae66',
         activeBackgroundColor: 'black',
-        inactiveBackgroundColor: '#0063B2FF',
+        inactiveBackgroundColor: '#c4ae66',
         inactiveTintColor: 'black',
       }}>
       <Tab.Screen

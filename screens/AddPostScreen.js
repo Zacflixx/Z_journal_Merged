@@ -149,31 +149,36 @@ const AddPostScreen = () => {
           value={post}
           onChangeText={(content) => setPost(content)}
           style={{
-            borderColor: '#0063B2FF',
+            borderColor: '#c4ae66',
             borderWidth: 5,
-            borderRadius: 40,
+            borderRadius: 15,
+            color: '#c4ae66',
           }}
         />
         {uploading ? (
           <StatusWrapper>
             <Text>{transferred} % Completed!</Text>
-            <ActivityIndicator size="large" color="#0000ff" />
+            <ActivityIndicator size="large" color="#c4ae66" />
           </StatusWrapper>
         ) : (
-          <SubmitBtn onPress={submitPost}>
-            <SubmitBtnText>Post</SubmitBtnText>
+          <SubmitBtn
+            style={{color: '#c4ae66', backgroundColor: 'black'}}
+            onPress={submitPost}>
+            <SubmitBtnText style={{color: '#c4ae66', backgroundColor: 'black'}}>
+              Post
+            </SubmitBtnText>
           </SubmitBtn>
         )}
       </InputWrapper>
-      <ActionButton buttonColor="#2e64e5">
+      <ActionButton buttonColor="#c4ae66">
         <ActionButton.Item
-          buttonColor="#9b59b6"
+          buttonColor="#c4ae66"
           title="Take Photo"
           onPress={takePhotoFromCamera}>
           <Icon name="camera-outline" style={styles.actionButtonIcon} />
         </ActionButton.Item>
         <ActionButton.Item
-          buttonColor="#3498db"
+          buttonColor="#c4ae66"
           title="Choose Photo"
           onPress={choosePhotoFromLibrary}>
           <Icon name="md-images-outline" style={styles.actionButtonIcon} />
@@ -189,7 +194,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#99a6ba',
+    backgroundColor: 'black',
   },
   actionButtonIcon: {
     fontSize: 28,

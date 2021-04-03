@@ -15,7 +15,7 @@ import {AuthContext} from '../navigation/AuthProvider';
 import firestore from '@react-native-firebase/firestore';
 import PostCard from '../components/PostCard';
 
-const ProfileScreen = ({navigation, route}) => {
+const Homescreen = ({navigation, route}) => {
   const {user, logout} = useContext(AuthContext);
 
   const [posts, setPosts] = useState([]);
@@ -157,7 +157,12 @@ const ProfileScreen = ({navigation, route}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#282e38', paddingTop: 3}}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: '#c4ae66',
+        paddingTop: 3,
+      }}>
       <ScrollView
         style={styles.container}
         contentContainerStyle={{
@@ -175,17 +180,17 @@ const ProfileScreen = ({navigation, route}) => {
   );
 };
 
-export default ProfileScreen;
+export default Homescreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#282e38',
-    borderColor: 'black',
+    backgroundColor: 'black',
+    borderColor: '#36301d',
     borderWidth: 4,
-    paddingRight: 17,
-    paddingLeft: 17,
-    paddingTop: 17,
+    paddingRight: 27,
+    paddingLeft: 27,
+    paddingTop: 27,
     flexDirection: 'column',
   },
   userImg: {

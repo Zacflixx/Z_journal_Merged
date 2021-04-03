@@ -24,6 +24,7 @@ import {AuthContext} from '../navigation/AuthProvider';
 import moment from 'moment';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import firestore from '@react-native-firebase/firestore';
+import {View} from 'react-native';
 
 const PostCard = ({item, onDelete, onPress}) => {
   const {user, logout} = useContext(AuthContext);
@@ -51,12 +52,12 @@ const PostCard = ({item, onDelete, onPress}) => {
     <Card
       key={item.id}
       style={{
-        backgroundColor: '#0063B2FF',
+        backgroundColor: '#c4ae66',
         borderWidth: 3,
-        borderColor: '#4c6387',
+        borderColor: 'black',
         borderRadius: 20,
         width: '50%',
-        height: 190,
+        height: 180,
         opacity: 0.9,
       }}>
       <UserInfo style={{}}>
@@ -78,34 +79,38 @@ const PostCard = ({item, onDelete, onPress}) => {
           <PostTime>{moment(item.postTime.toDate()).fromNow()}</PostTime>
         </UserInfoText>
       </UserInfo>
-      <PostText style={{color: '#fffdf7'}}>{item.post}</PostText>
+      <View style={{flexDirection: 'row'}}>
+        <PostText style={{color: '#fffdf7', height: 42, width: 120}}>
+          {item.post}
+        </PostText>
+        <InteractionWrapper>
+          {/* <Interaction active={item.liked}>
+          <Ionicons name={likeIcon} size={25} color={likeIconColor} />
+          <InteractionText active={item.liked}>{likeText}</InteractionText>
+        </Interaction> */}
+          {/* <Interaction>
+          <Ionicons name="md-chatbubble-outline" size={25} />
+          <InteractionText>{commentText}</InteractionText>
+        </Interaction> */}
+          {user.uid == item.userId ? (
+            <Interaction onPress={() => onDelete(item.id)}>
+              <Ionicons name="md-trash-bin" size={25} color="#383426" />
+            </Interaction>
+          ) : null}
+        </InteractionWrapper>
+      </View>
       {/* {item.postImg != null ? <PostImg source={{uri: item.postImg}} /> : */}
       <Divider />
       {item.postImg != null ? (
         <ProgressiveImage
           defaultImageSource={require('../assets/default-img.jpg')}
           source={{uri: item.postImg}}
-          style={{width: '100%', height: 120}}
+          style={{width: '100%', height: 60}}
           resizeMode="contain"
         />
       ) : (
         <Divider />
       )}
-      <InteractionWrapper>
-        {/* <Interaction active={item.liked}>
-          <Ionicons name={likeIcon} size={25} color={likeIconColor} />
-          <InteractionText active={item.liked}>{likeText}</InteractionText>
-        </Interaction> */}
-        {/* <Interaction>
-          <Ionicons name="md-chatbubble-outline" size={25} />
-          <InteractionText>{commentText}</InteractionText>
-        </Interaction> */}
-        {user.uid == item.userId ? (
-          <Interaction onPress={() => onDelete(item.id)}>
-            <Ionicons name="md-trash-bin" size={25} color="#b09553" />
-          </Interaction>
-        ) : null}
-      </InteractionWrapper>
     </Card>
   );
 };
