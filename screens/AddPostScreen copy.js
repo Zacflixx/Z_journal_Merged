@@ -155,6 +155,7 @@ const AddPostScreen = () => {
 
         <InputField
           placeholder="What's on your mind?"
+          placeholderTextColor="red"
           multiline
           numberOfLines={4}
           value={post}
@@ -208,7 +209,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#99a6ba',
+    backgroundColor: 'yellow',
   },
   actionButtonIcon: {
     fontSize: 28,

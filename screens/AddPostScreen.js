@@ -144,8 +144,9 @@ const AddPostScreen = () => {
 
         <InputField
           placeholder="What's on your mind?"
+          placeholderTextColor="#635935"
           multiline
-          numberOfLines={4}
+          numberOfLines={8}
           value={post}
           onChangeText={(content) => setPost(content)}
           style={{
@@ -153,6 +154,7 @@ const AddPostScreen = () => {
             borderWidth: 5,
             borderRadius: 15,
             color: '#c4ae66',
+            marginTop: 90,
           }}
         />
         {uploading ? (
@@ -164,13 +166,28 @@ const AddPostScreen = () => {
           <SubmitBtn
             style={{color: '#c4ae66', backgroundColor: 'black'}}
             onPress={submitPost}>
-            <SubmitBtnText style={{color: '#c4ae66', backgroundColor: 'black'}}>
-              Post
+            <SubmitBtnText
+              style={{
+                color: '#c4ae66',
+                backgroundColor: 'black',
+                // marginTop: 100,
+                // marginRight: 180,
+                borderColor: '#c4ae66',
+                borderRadius: 6,
+                borderWidth: 2,
+                borderStyle: 'dotted',
+              }}>
+              ~Post Now~
             </SubmitBtnText>
           </SubmitBtn>
         )}
       </InputWrapper>
-      <ActionButton buttonColor="#c4ae66">
+      <ActionButton
+        style={{
+          marginBottom: 130,
+          marginRight: 70,
+        }}
+        buttonColor="#c4ae66">
         <ActionButton.Item
           buttonColor="#c4ae66"
           title="Take Photo"
@@ -184,6 +201,14 @@ const AddPostScreen = () => {
           <Icon name="md-images-outline" style={styles.actionButtonIcon} />
         </ActionButton.Item>
       </ActionButton>
+      <Text
+        style={{
+          marginBottom: 140,
+          marginLeft: 155,
+          color: '#c4ae66',
+        }}>
+        Add Image
+      </Text>
     </View>
   );
 };
