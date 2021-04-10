@@ -155,7 +155,7 @@ const AddPostScreen = () => {
 
         <InputField
           placeholder="What's on your mind?"
-          placeholderTextColor="red"
+          placeholderTextColor="white"
           multiline
           numberOfLines={4}
           value={post}
@@ -175,13 +175,13 @@ const AddPostScreen = () => {
           marginRight: 250,
         }}>
         <ActionButton.Item
-          buttonColor="#9b59b6"
+          buttonColor="#red"
           title="Take Photo"
           onPress={takePhotoFromCamera}>
           <Icon name="camera-outline" style={styles.actionButtonIcon} />
         </ActionButton.Item>
         <ActionButton.Item
-          buttonColor="#3498db"
+          buttonColor="#red"
           title="Choose Photo"
           onPress={choosePhotoFromLibrary}>
           <Icon name="md-images-outline" style={styles.actionButtonIcon} />

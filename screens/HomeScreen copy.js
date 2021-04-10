@@ -196,7 +196,7 @@ const HomeScreen = ({navigation, route}) => {
                   width: 250,
                   height: 20,
                   borderRadius: 4,
-                  color: 'red',
+                  color: 'white',
                 }}
               />
               <View
@@ -228,11 +228,11 @@ const HomeScreen = ({navigation, route}) => {
       ) : (
         <Container
           style={{
-            backgroundColor: '#282e38',
-            borderColor: '#292417',
-            borderWidth: 3,
-            borderRadius: 4,
-            flex: 1,
+            backgroundColor: '#fff',
+            borderColor: '#fff',
+            borderWidth: 33,
+            borderRadius: 43,
+            flex: 14,
 
             // flexDirection: 'row',
           }}>
