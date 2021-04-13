@@ -139,34 +139,11 @@ const AddPostScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* <Text
-        style={{
-          paddingTop: 10,
-          alignSelf: 'center',
-          color: '#0063B2FF',
-          fontSize: 26,
-          fontWeight: 'bold',
-          paddingBottom: 10,
-        }}>
-        Add to your Z-Journal
-      </Text> */}
+     
       <InputWrapper>
         {image != null ? <AddImage source={{uri: image}} /> : null}
 
-        <InputField
-          placeholder="What's on your mind?"
-          placeholderTextColor="white"
-          multiline
-          numberOfLines={4}
-          value={post}
-          onChangeText={(content) => setPost(content)}
-          style={{
-            borderColor: '#0063B2FF',
-            borderWidth: 5,
-            borderRadius: 40,
-          }}
-        />
-      </InputWrapper>
+       
 
       <ActionButton
         buttonColor="#2e64e5"
@@ -204,16 +181,4 @@ const AddPostScreen = () => {
 
 export default AddPostScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'yellow',
-  },
-  actionButtonIcon: {
-    fontSize: 28,
-    height: 22,
-    color: 'white',
-  },
-});
+
