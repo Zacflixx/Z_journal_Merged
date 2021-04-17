@@ -163,6 +163,19 @@ const Homescreen = ({navigation, route}) => {
         backgroundColor: '#c4ae66',
         paddingTop: 3,
       }}>
+      <View>
+        <TouchableOpacity
+          style={{
+            marginTop: 19,
+            borderwidth: 4,
+            borderColor: 'red',
+            padding: 40,
+            backgroundColor: 'blue',
+          }}
+          onPress={() => navigation.navigate('ViewPost')}>
+          <Text>I LOVwe me</Text>
+        </TouchableOpacity>
+      </View>
       <ScrollView
         style={styles.container}
         contentContainerStyle={{
