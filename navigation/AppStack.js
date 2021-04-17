@@ -9,6 +9,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import HomeScreen from '../screens/HomeScreen';
 import ChatScreen from '../screens/ChatScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import ViewScreen from '../screens/ViewScreen';
 import AddPostScreen from '../screens/AddPostScreen';
 import MessagesScreen from '../screens/MessagesScreen';
 import EditProfileScreen from '../screens/EditProfileScreen';
@@ -44,15 +45,15 @@ const FeedStack = ({navigation}) => (
               size={25}
               backgroundColor="black"
               color="#c4ae66"
-              onPress={() => navigation.navigate('AddPost')}
+              onPress={() => navigation.navigate('ViewPost')}
             />
           </View>
         ),
       }}
     />
     <Stack.Screen
-      name="AddPost"
-      component={AddPostScreen}
+      name="ViewPost"
+      component={ViewScreen}
       options={{
         title: '',
         headerTitleAlign: 'center',
@@ -88,6 +89,25 @@ const FeedStack = ({navigation}) => (
         ),
       }}
     />
+    {/* <Stack.Screen
+      name="ViewScreen"
+      component={ViewScreen}
+      options={{
+        title: '',
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: '#fff',
+          shadowColor: '#fff',
+          elevation: 0,
+        },
+        headerBackTitleVisible: false,
+        headerBackImage: () => (
+          <View style={{marginLeft: 15}}>
+            <Ionicons name="arrow-back" size={25} color="#2e64e5" />
+          </View>
+        ),
+      }}
+    /> */}
   </Stack.Navigator>
 );
 
@@ -142,6 +162,25 @@ const ProfileStack = ({navigation}) => (
     />
   </Stack.Navigator>
 );
+
+// const ViewStack = ({navigation}) => (
+//   <Stack.Navigator>
+//         <Stack.Screen
+//       name="View"
+//       component={ViewScreen}
+//       options={{
+//         headerTitle: 'Our view',
+//         headerBackTitleVisible: false,
+//         headerTitleAlign: 'center',
+//         headerStyle: {
+//           backgroundColor: '#fff',
+//           shadowColor: '#fff',
+//           elevation: 0,
+//         },
+//       }}
+//     />
+//   </Stack.Navigator>
+// );
 
 const AppStack = () => {
   const getTabBarVisibility = (route) => {
