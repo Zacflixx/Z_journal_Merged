@@ -13,6 +13,7 @@ import ViewScreen from '../screens/ViewScreen';
 import AddPostScreen from '../screens/AddPostScreen';
 import MessagesScreen from '../screens/MessagesScreen';
 import EditProfileScreen from '../screens/EditProfileScreen';
+import PostCard from '../components/PostCard';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -79,6 +80,25 @@ const FeedStack = ({navigation}) => (
         headerStyle: {
           backgroundColor: '#fff',
           shadowColor: '#fff',
+          elevation: 0,
+        },
+        headerBackTitleVisible: false,
+        headerBackImage: () => (
+          <View style={{marginLeft: 15}}>
+            <Ionicons name="arrow-back" size={25} color="#2e64e5" />
+          </View>
+        ),
+      }}
+    />
+    <Stack.Screen
+      name="post"
+      component={PostCard}
+      options={{
+        title: '',
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: '#2e64e515',
+          shadowColor: '#2e64e515',
           elevation: 0,
         },
         headerBackTitleVisible: false,

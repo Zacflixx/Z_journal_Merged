@@ -163,7 +163,7 @@ const Homescreen = ({navigation, route}) => {
         backgroundColor: '#c4ae66',
         paddingTop: 3,
       }}>
-      <View>
+      {/* <View>
         <TouchableOpacity
           style={{
             marginTop: 19,
@@ -175,19 +175,31 @@ const Homescreen = ({navigation, route}) => {
           onPress={() => navigation.navigate('ViewPost')}>
           <Text>I LOVwe me</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
       <ScrollView
         style={styles.container}
         contentContainerStyle={{
           justifyContent: 'flex-start',
           alignItems: 'center',
           flexDirection: 'row',
-          flexWrap: 'wrap',
         }}
         showsVerticalScrollIndicator={false}>
-        {posts.map((item) => (
-          <PostCard key={item.id} item={item} onDelete={handleDelete} />
-        ))}
+        <TouchableOpacity
+          style={{
+            // backgroundColor: '#c4ae66',
+            // borderWidth: 3,
+            // borderColor: 'black',
+            // borderRadius: 20,
+            width: '100%',
+            height: '100%',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+          }}
+          onPress={() => navigation.navigate('ViewPost')}>
+          {posts.map((item) => (
+            <PostCard key={item.id} item={item} onDelete={handleDelete} />
+          ))}
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );

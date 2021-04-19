@@ -27,7 +27,7 @@ import firestore from '@react-native-firebase/firestore';
 import {View} from 'react-native';
 import ViewScreen from '../screens/ViewScreen';
 
-const PostCard = ({navigation, route, item, onDelete, onPress}) => {
+const PostCard = ({navigation, item, onDelete, onPress}) => {
   const {user, logout} = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
 
