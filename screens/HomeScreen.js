@@ -8,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView,
   Alert,
+  Button,
 } from 'react-native';
 import FormButton from '../components/FormButton';
 import {AuthContext} from '../navigation/AuthProvider';
@@ -184,7 +185,7 @@ const Homescreen = ({navigation, route}) => {
           flexDirection: 'row',
         }}
         showsVerticalScrollIndicator={false}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{
             // backgroundColor: '#c4ae66',
             // borderWidth: 3,
@@ -195,11 +196,16 @@ const Homescreen = ({navigation, route}) => {
             flexDirection: 'row',
             flexWrap: 'wrap',
           }}
-          onPress={() => navigation.navigate('ViewPost')}>
-          {posts.map((item) => (
-            <PostCard key={item.id} item={item} onDelete={handleDelete} />
-          ))}
-        </TouchableOpacity>
+          > */}
+        {posts.map((item) => (
+          <PostCard
+            key={item.id}
+            item={item}
+            onDelete={handleDelete}
+            onView={() => navigation.navigate('ViewPost')}
+          />
+        ))}
+        {/* </TouchableOpacity> */}
       </ScrollView>
     </SafeAreaView>
   );
