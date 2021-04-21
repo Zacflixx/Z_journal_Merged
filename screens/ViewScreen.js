@@ -1,241 +1,105 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  SafeAreaView,
-  Alert,
-} from 'react-native';
-import FormButton from '../components/FormButton';
+  Container,
+  Card,
+  UserInfo,
+  UserImg,
+  UserName,
+  UserInfoText,
+  PostTime,
+  PostText,
+  PostImg,
+  InteractionWrapper,
+  Interaction,
+  InteractionText,
+  Divider,
+} from '../styles/FeedStyles';
+
+import ProgressiveImage from '../components/ProgressiveImage';
+
 import {AuthContext} from '../navigation/AuthProvider';
 
+import moment from 'moment';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import firestore from '@react-native-firebase/firestore';
-import PostCard from '../components/PostCard';
+import {View} from 'react-native';
 
-const Homescreen = ({navigation, route}) => {
-  const {user, logout} = useContext(AuthContext);
+const ViewScreen = ({navigation, item, onDelete, onPress, props}) => {
+  // const {user, logout} = useContext(AuthContext);
+  // const [userData, setUserData] = useState(null);
 
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [deleted, setDeleted] = useState(false);
-  const [userData, setUserData] = useState(null);
+  // const getUser = async () => {
+  //   await firestore()
+  //     .collection('users')
+  //     .doc(item.userId)
+  //     .get()
+  //     .then((documentSnapshot) => {
+  //       if (documentSnapshot.exists) {
+  //         console.log('User Data', documentSnapshot.data());
+  //         setUserData(documentSnapshot.data());
+  //       }
+  //     });
+  // };
 
-  const fetchPosts = async () => {
-    try {
-      const list = [];
-
-      await firestore()
-        .collection('posts')
-        .where('id', '==', item.id)
-        .orderBy('postTime', 'desc')
-        .get()
-        .then((querySnapshot) => {
-          // console.log('Total Posts: ', querySnapshot.size);
-
-          querySnapshot.forEach((doc) => {
-            const {
-              userId,
-              post,
-              postImg,
-              postTime,
-              likes,
-              comments,
-            } = doc.data();
-            list.push({
-              id: doc.id,
-              userId,
-              userName: 'Test Name',
-              userImg:
-                'https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg',
-              postTime: postTime,
-              post,
-              postImg,
-              liked: false,
-              likes,
-              comments,
-            });
-          });
-        });
-
-      setPosts(list);
-
-      if (loading) {
-        setLoading(false);
-      }
-
-      console.log('Posts: ', posts);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const getUser = async () => {
-    await firestore()
-      .collection('users')
-      .doc(route.params ? route.params.userId : user.uid)
-      .get()
-      .then((documentSnapshot) => {
-        if (documentSnapshot.exists) {
-          console.log('User Data', documentSnapshot.data());
-          setUserData(documentSnapshot.data());
-        }
-      });
-  };
-
-  useEffect(() => {
-    getUser();
-    fetchPosts();
-    navigation.addListener('focus', () => setLoading(!loading));
-  }, [navigation, loading]);
-
-  const handleDelete = (postId) => {
-    Alert.alert(
-      'Delete post',
-      'Are you sure?',
-      [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed!'),
-          style: 'cancel',
-        },
-        {
-          text: 'Confirm',
-          onPress: () => deletePost(postId),
-        },
-      ],
-      {cancelable: false},
-    );
-  };
-  const deletePost = (postId) => {
-    console.log('Current Post Id: ', postId);
-
-    firestore()
-      .collection('posts')
-      .doc(postId)
-      .get()
-      .then((documentSnapshot) => {
-        if (documentSnapshot.exists) {
-          const {postImg} = documentSnapshot.data();
-
-          if (postImg != null) {
-            const storageRef = storage().refFromURL(postImg);
-            const imageRef = storage().ref(storageRef.fullPath);
-
-            imageRef
-              .delete()
-              .then(() => {
-                console.log(`${postImg} has been deleted successfully.`);
-                deleteFirestoreData(postId);
-              })
-              .catch((e) => {
-                console.log('Error while deleting the image. ', e);
-              });
-            // If the post image is not available
-          } else {
-            deleteFirestoreData(postId);
-          }
-        }
-      });
-  };
-
-  const deleteFirestoreData = (postId) => {
-    firestore()
-      .collection('posts')
-      .doc(postId)
-      .delete()
-      .then(() => {
-        Alert.alert(
-          'Post deleted!',
-          'Your post has been deleted successfully!',
-        );
-        setDeleted(true);
-      })
-      .catch((e) => console.log('Error deleting posst.', e));
-  };
+  // useEffect(() => {
+  //   getUser();
+  // }, []);
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: '#c4ae66',
-        paddingTop: 3,
-      }}>
-      {posts.map((item) => (
-        <PostCard key={item.id} item={item} onDelete={handleDelete} />
-      ))}
-    </SafeAreaView>
+    //start of the card editing code
+
+    // <Card
+    //   style={
+    //     {
+    //       // backgroundColor: '#c4ae66',
+    //       // borderWidth: 3,
+    //       // borderColor: 'black',
+    //       // borderRadius: 20,
+    //       // width: '50%',
+    //       // height: 180,
+    //       // opacity: 0.9,
+    //     }
+    //   }>
+    //   <UserInfo style={{}}>
+    //     <UserImg
+    //       source={{
+    //         uri: userData
+    //           ? userData.userImg ||
+    //             'https://png.pngitem.com/pimgs/s/168-1689599_male-user-filled-icon-user-icon-100-x.png'
+    //           : 'https://png.pngitem.com/pimgs/s/168-1689599_male-user-filled-icon-user-icon-100-x.png',
+    //       }}
+    //     />
+    //     <UserInfoText style={{color: 'black'}}>
+    //       <TouchableOpacity onPress={onPress}>
+    //         <UserName style={{color: 'black'}}>
+    //           {userData ? userData.fname || 'Z-Journal' : 'Z-Journal'}{' '}
+    //           {userData ? userData.lname || 'User' : 'User'}
+    //         </UserName>
+    //       </TouchableOpacity>
+    //       <PostTime>{moment(item.postTime.toDate()).fromNow()}</PostTime>
+    //     </UserInfoText>
+    //   </UserInfo>
+    <View style={{flexDirection: 'row'}}>
+      <PostText style={{color: '#fffdf7', height: 42, width: 120}}>
+        {this.props.dataFromParent}
+      </PostText>
+    </View>
+
+    //     <Divider />
+    //     {item.postImg != null ? (
+    //       <ProgressiveImage
+    //         defaultImageSource={require('../assets/default-img.jpg')}
+    //         source={{uri: item.postImg}}
+    //         style={{width: '100%', height: 60}}
+    //         resizeMode="contain"
+    //       />
+    //     ) : (
+    //       <Divider />
+    //     )}
+    //   </Card>
   );
 };
 
-export default Homescreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'black',
-    borderColor: '#36301d',
-    borderWidth: 4,
-    paddingRight: 27,
-    paddingLeft: 27,
-    paddingTop: 27,
-    flexDirection: 'column',
-  },
-  userImg: {
-    height: 150,
-    width: 150,
-    borderRadius: 75,
-  },
-  userName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  aboutUser: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#666',
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  userBtnWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    width: '100%',
-    marginBottom: 10,
-  },
-  userBtn: {
-    borderColor: '#2e64e5',
-    borderWidth: 2,
-    borderRadius: 3,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    marginHorizontal: 5,
-  },
-  userBtnTxt: {
-    color: '#2e64e5',
-  },
-  userInfoWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '100%',
-    marginVertical: 20,
-  },
-  userInfoItem: {
-    justifyContent: 'center',
-  },
-  userInfoTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 5,
-    textAlign: 'center',
-  },
-  userInfoSubTitle: {
-    fontSize: 12,
-    color: '#666',
-    textAlign: 'center',
-  },
-});
+export default ViewScreen;
