@@ -48,73 +48,81 @@ const PostCard = ({navigation, item, onDelete, onView, onPress}) => {
     getUser();
   }, []);
 
+  const onView1 = async () => {
+    <Text>i love you</Text>;
+  };
+
   return (
     //start of the card editing code
 
     <Card
       key={item.id}
-      style={
-        {
-          // backgroundColor: '#c4ae66',
-          // borderWidth: 3,
-          // borderColor: 'black',
-          // borderRadius: 20,
-          // width: '50%',
-          // height: 180,
-          // opacity: 0.9,
-        }
-      }>
-      <UserInfo style={{}}>
-        <UserImg
-          source={{
-            uri: userData
-              ? userData.userImg ||
-                'https://png.pngitem.com/pimgs/s/168-1689599_male-user-filled-icon-user-icon-100-x.png'
-              : 'https://png.pngitem.com/pimgs/s/168-1689599_male-user-filled-icon-user-icon-100-x.png',
-          }}
-        />
-        <UserInfoText style={{color: 'black'}}>
-          <TouchableOpacity onPress={onPress}>
-            <UserName style={{color: 'black'}}>
-              {userData ? userData.fname || 'Z-Journal' : 'Z-Journal'}{' '}
-              {userData ? userData.lname || 'User' : 'User'}
-            </UserName>
-          </TouchableOpacity>
-          <PostTime>{moment(item.postTime.toDate()).fromNow()}</PostTime>
-        </UserInfoText>
-      </UserInfo>
-      <View style={{flexDirection: 'row'}}>
-        <PostText style={{color: '#fffdf7', height: 42, width: 120}}>
-          {item.post}
-        </PostText>
-        <InteractionWrapper>
-          {/* <Interaction active={item.liked}>
+      style={{
+        backgroundColor: '#c4ae66',
+        borderWidth: 3,
+        borderColor: 'black',
+        borderRadius: 20,
+        width: '50%',
+        height: 180,
+        opacity: 0.9,
+      }}>
+      <TouchableOpacity
+        key={item.id}
+        item={item}
+        onView2={onView1}
+        onPress={() => onView()}>
+        <UserInfo style={{}}>
+          <UserImg
+            source={{
+              uri: userData
+                ? userData.userImg ||
+                  'https://png.pngitem.com/pimgs/s/168-1689599_male-user-filled-icon-user-icon-100-x.png'
+                : 'https://png.pngitem.com/pimgs/s/168-1689599_male-user-filled-icon-user-icon-100-x.png',
+            }}
+          />
+          <UserInfoText style={{color: 'black'}}>
+            <TouchableOpacity onPress={onPress}>
+              <UserName style={{color: 'black'}}>
+                {userData ? userData.fname || 'Z-Journal' : 'Z-Journal'}{' '}
+                {userData ? userData.lname || 'User' : 'User'}
+              </UserName>
+            </TouchableOpacity>
+            <PostTime>{moment(item.postTime.toDate()).fromNow()}</PostTime>
+          </UserInfoText>
+        </UserInfo>
+        <View style={{flexDirection: 'row'}}>
+          <PostText style={{color: '#fffdf7', height: 42, width: 120}}>
+            {item.post}
+          </PostText>
+          <InteractionWrapper>
+            {/* <Interaction active={item.liked}>
           <Ionicons name={likeIcon} size={25} color={likeIconColor} />
           <InteractionText active={item.liked}>{likeText}</InteractionText>
         </Interaction> */}
-          {/* <Interaction>
+            {/* <Interaction>
           <Ionicons name="md-chatbubble-outline" size={25} />
           <InteractionText>{commentText}</InteractionText>
         </Interaction> */}
-          {user.uid == item.userId ? (
-            <Interaction onPress={() => onView()}>
-              <Ionicons name="md-trash-bin" size={25} color="#383426" />
-            </Interaction>
-          ) : null}
-        </InteractionWrapper>
-      </View>
-      {/* {item.postImg != null ? <PostImg source={{uri: item.postImg}} /> : */}
-      <Divider />
-      {item.postImg != null ? (
-        <ProgressiveImage
-          defaultImageSource={require('../assets/default-img.jpg')}
-          source={{uri: item.postImg}}
-          style={{width: '100%', height: 60}}
-          resizeMode="contain"
-        />
-      ) : (
+            {user.uid == item.userId ? (
+              <Interaction onPress={() => onDelete(item.id)}>
+                <Ionicons name="md-trash-bin" size={25} color="#383426" />
+              </Interaction>
+            ) : null}
+          </InteractionWrapper>
+        </View>
+        {/* {item.postImg != null ? <PostImg source={{uri: item.postImg}} /> : */}
         <Divider />
-      )}
+        {item.postImg != null ? (
+          <ProgressiveImage
+            defaultImageSource={require('../assets/default-img.jpg')}
+            source={{uri: item.postImg}}
+            style={{width: '100%', height: 60}}
+            resizeMode="contain"
+          />
+        ) : (
+          <Divider />
+        )}
+      </TouchableOpacity>
     </Card>
   );
 };

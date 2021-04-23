@@ -183,6 +183,10 @@ const Homescreen = ({navigation, route}) => {
           justifyContent: 'flex-start',
           alignItems: 'center',
           flexDirection: 'row',
+          width: '100%',
+          height: '10%',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
         }}
         showsVerticalScrollIndicator={false}>
         {/* <TouchableOpacity
@@ -202,7 +206,9 @@ const Homescreen = ({navigation, route}) => {
             key={item.id}
             item={item}
             onDelete={handleDelete}
-            onView={() => navigation.navigate('ViewPost')}
+            onView={() =>
+              navigation.navigate('ViewPost', {postView: item.post})
+            }
           />
         ))}
         {/* </TouchableOpacity> */}
