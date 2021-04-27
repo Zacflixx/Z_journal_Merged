@@ -170,8 +170,13 @@ const HomeScreen = ({navigation, route}) => {
             borderRadius: 43,
             flex: 14,
 
-            // flexDirection: 'row',
           }}>
+            
+          <FlatList
+            data={data1}
+            renderItem={this.renderItem}
+            keyExtractor={(item, index) => index.toString()}
+          />
           <StatusBar backgroundColor="black" barStyle="light-content" />
           <FlatList
             data={posts}
@@ -192,11 +197,6 @@ const HomeScreen = ({navigation, route}) => {
             showsVerticalScrollIndicator={false}
           />
 
-          {/* <FlatList
-            data={data1}
-            renderItem={this.renderItem}
-            keyExtractor={(item, index) => index.toString()}
-          /> */}
         </Container>
       )}
     </SafeAreaView>

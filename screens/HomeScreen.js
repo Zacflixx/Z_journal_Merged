@@ -220,27 +220,6 @@ const Homescreen = ({navigation, route}) => {
 export default Homescreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'black',
-    borderColor: '#36301d',
-    borderWidth: 4,
-    paddingRight: 27,
-    paddingLeft: 27,
-    paddingTop: 27,
-    flexDirection: 'column',
-  },
-  userImg: {
-    height: 150,
-    width: 150,
-    borderRadius: 75,
-  },
-  userName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 10,
-  },
   aboutUser: {
     fontSize: 12,
     fontWeight: '600',
@@ -261,6 +240,27 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 12,
     marginHorizontal: 5,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+    borderColor: '#36301d',
+    borderWidth: 4,
+    paddingRight: 27,
+    paddingLeft: 27,
+    paddingTop: 27,
+    flexDirection: 'column',
+  },
+  userImg: {
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+  },
+  userName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 10,
   },
   userBtnTxt: {
     color: '#2e64e5',
