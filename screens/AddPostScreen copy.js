@@ -138,34 +138,14 @@ const AddPostScreen = () => {
   };
 
   return (
+    //this is our screen for adding posts to our journal
     <View style={styles.container}>
      
       <InputWrapper>
         {image != null ? <AddImage source={{uri: image}} /> : null}
 
        
-
-      <ActionButton
-        buttonColor="#2e64e5"
-        style={{
-          marginBottom: 190,
-          marginRight: 250,
-        }}>
-        <ActionButton.Item
-          buttonColor="#red"
-          title="Take Photo"
-          onPress={takePhotoFromCamera}>
-          <Icon name="camera-outline" style={styles.actionButtonIcon} />
-        </ActionButton.Item>
-        <ActionButton.Item
-          buttonColor="#red"
-          title="Choose Photo"
-          onPress={choosePhotoFromLibrary}>
-          <Icon name="md-images-outline" style={styles.actionButtonIcon} />
-        </ActionButton.Item>
-      </ActionButton>
-
-      {uploading ? (
+{uploading ? (
         <StatusWrapper>
           <Text>{transferred} % Completed!</Text>
           <ActivityIndicator size="large" color="#0000ff" />
@@ -176,6 +156,28 @@ const AddPostScreen = () => {
         </SubmitBtn>
       )}
     </View>
+      <ActionButton.Item
+          buttonColor="#red"
+          title="Choose Photo"
+          onPress={choosePhotoFromLibrary}>
+          <Icon name="md-images-outline" style={styles.actionButtonIcon} />
+        </ActionButton.Item>
+        <ActionButton.Item
+          buttonColor="#red"
+          title="Take Photo"
+          onPress={takePhotoFromCamera}>
+          <Icon name="camera-outline" style={styles.actionButtonIcon} />
+        </ActionButton.Item>
+        <ActionButton
+        buttonColor="#2e64e5"
+        style={{
+          marginBottom: 190,
+          marginRight: 250,
+        }}>
+        
+      </ActionButton>
+
+      
   );
 };
 
