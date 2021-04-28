@@ -24,13 +24,13 @@ import {AuthContext} from '../navigation/AuthProvider';
 import moment from 'moment';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import firestore from '@react-native-firebase/firestore';
-import {View} from 'react-native';
+import {View, Image, ScrollView} from 'react-native';
 
-const ViewScreen = ({route: {params}}) => {
+const ViewScreen = ({route: {params}}, props) => {
   const {user, logout} = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
 
-  const {postView} = params;
+  const {postView, meth} = params;
 
   const getUser = async () => {
     await firestore()
@@ -52,24 +52,38 @@ const ViewScreen = ({route: {params}}) => {
   return (
     //start of the card editing code
 
-    <Card
+    <ScrollView
       style={{
         backgroundColor: '#c4ae66',
         borderWidth: 3,
         borderColor: 'black',
         borderRadius: 20,
-        alignItems: 'center',
-        alignSelf: 'center',
+        marginLeft: 40,
+        marginTop: 40,
         width: '80%',
-        height: 180,
+        height: 600,
         opacity: 0.9,
       }}>
-      <View style={{flexDirection: 'row'}}>
-        <PostText style={{color: '#fffdf7', fontSize: 20}}>
-          Our post is {postView}
-        </PostText>
+      <View
+        style={{
+          flexDirection: 'row',
+          marginTop: 10,
+          alignSelf: 'center',
+        }}>
+        <PostText style={{color: 'black', fontSize: 40}}>My post</PostText>
       </View>
-    </Card>
+      <View style={{flexDirection: 'row', marginTop: 40}}>
+        <PostText style={{color: 'black', fontSize: 20}}>{postView}</PostText>
+      </View>
+
+      <ProgressiveImage
+        source={{
+          uri: meth,
+        }}
+        style={{width: '100%', height: 360}}
+        resizeMode="cover"
+      />
+    </ScrollView>
   );
 };
 

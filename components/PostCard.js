@@ -48,10 +48,6 @@ const PostCard = ({navigation, item, onDelete, onView, onPress}) => {
     getUser();
   }, []);
 
-  const onView1 = async () => {
-    <Text>i love you</Text>;
-  };
-
   return (
     //start of the card editing code
 
@@ -63,14 +59,10 @@ const PostCard = ({navigation, item, onDelete, onView, onPress}) => {
         borderColor: 'black',
         borderRadius: 20,
         width: '50%',
-        height: 180,
+        height: 170,
         opacity: 0.9,
       }}>
-      <TouchableOpacity
-        key={item.id}
-        item={item}
-        onView2={onView1}
-        onPress={() => onView()}>
+      <TouchableOpacity onPress={() => onView()}>
         <UserInfo style={{}}>
           <UserImg
             source={{

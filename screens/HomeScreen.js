@@ -10,6 +10,7 @@ import {
   Alert,
   Button,
 } from 'react-native';
+import ProgressiveImage from '../components/ProgressiveImage';
 import FormButton from '../components/FormButton';
 import {AuthContext} from '../navigation/AuthProvider';
 
@@ -164,54 +165,41 @@ const Homescreen = ({navigation, route}) => {
         backgroundColor: '#c4ae66',
         paddingTop: 3,
       }}>
-      {/* <View>
-        <TouchableOpacity
-          style={{
-            marginTop: 19,
-            borderwidth: 4,
-            borderColor: 'red',
-            padding: 40,
-            backgroundColor: 'blue',
-          }}
-          onPress={() => navigation.navigate('ViewPost')}>
-          <Text>I LOVwe me</Text>
-        </TouchableOpacity>
-      </View> */}
       <ScrollView
         style={styles.container}
         contentContainerStyle={{
-          justifyContent: 'flex-start',
-          alignItems: 'center',
           flexDirection: 'row',
           width: '100%',
-          height: '10%',
-          flexDirection: 'row',
           flexWrap: 'wrap',
         }}
         showsVerticalScrollIndicator={false}>
-        {/* <TouchableOpacity
-          style={{
-            // backgroundColor: '#c4ae66',
-            // borderWidth: 3,
-            // borderColor: 'black',
-            // borderRadius: 20,
-            width: '100%',
-            height: '100%',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-          }}
-          > */}
         {posts.map((item) => (
           <PostCard
             key={item.id}
             item={item}
             onDelete={handleDelete}
             onView={() =>
-              navigation.navigate('ViewPost', {postView: item.post})
+              navigation.navigate('ViewPost', {
+                postView: item.post,
+                meth: item.postImg,
+              })
             }
           />
         ))}
-        {/* </TouchableOpacity> */}
+        {/* <View>
+          <Text style={{color: 'red', fontSize: 55}}> this is not me </Text>
+          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
+          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
+          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
+          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
+          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
+          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
+          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
+          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
+          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
+          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
+          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
+        </View> */}
       </ScrollView>
     </SafeAreaView>
   );
@@ -220,6 +208,14 @@ const Homescreen = ({navigation, route}) => {
 export default Homescreen;
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'black',
+    borderColor: '#36301d',
+    borderWidth: 4,
+    paddingRight: 27,
+    paddingLeft: 27,
+    paddingTop: 27,
+  },
   aboutUser: {
     fontSize: 12,
     fontWeight: '600',
@@ -241,16 +237,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     marginHorizontal: 5,
   },
-  container: {
-    flex: 1,
-    backgroundColor: 'black',
-    borderColor: '#36301d',
-    borderWidth: 4,
-    paddingRight: 27,
-    paddingLeft: 27,
-    paddingTop: 27,
-    flexDirection: 'column',
-  },
+
   userImg: {
     height: 150,
     width: 150,

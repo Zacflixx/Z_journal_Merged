@@ -175,7 +175,7 @@ const AddPostScreen = () => {
                 borderColor: '#c4ae66',
                 borderRadius: 6,
                 borderWidth: 2,
-                borderStyle: 'dotted',
+                // borderStyle: 'dotted',
               }}>
               ~Post Now~
             </SubmitBtnText>
