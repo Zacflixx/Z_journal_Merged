@@ -86,15 +86,14 @@ const PostCard = ({navigation, item, onDelete, onView, onPress}) => {
           <PostText style={{color: '#fffdf7', height: 42, width: 120}}>
             {item.post}
           </PostText>
-          <InteractionWrapper>
+          <InteractionWrapper style={{flexDirection: 'row'}}>
             {/* <Interaction active={item.liked}>
-          <Ionicons name={likeIcon} size={25} color={likeIconColor} />
-          <InteractionText active={item.liked}>{likeText}</InteractionText>
-        </Interaction> */}
+              <Ionicons name={likeIcon} size={25} color={likeIconColor} />
+              <InteractionText active={item.liked}>{likeText}</InteractionText>
+            </Interaction> */}
             {/* <Interaction>
-          <Ionicons name="md-chatbubble-outline" size={25} />
-          <InteractionText>{commentText}</InteractionText>
-        </Interaction> */}
+              <Ionicons name="md-chatbubble-outline" size={25} />
+            </Interaction> */}
             {user.uid == item.userId ? (
               <Interaction onPress={() => onDelete(item.id)}>
                 <Ionicons name="md-trash-bin" size={25} color="#383426" />
