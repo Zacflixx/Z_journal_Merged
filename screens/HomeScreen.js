@@ -182,6 +182,9 @@ const Homescreen = ({navigation, route}) => {
               navigation.navigate('ViewPost', {
                 postView: item.post,
                 meth: item.postImg,
+
+                wan: item.userId,
+                wann: item.id,
               })
             }
           />

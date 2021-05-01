@@ -56,7 +56,7 @@ const FeedStack = ({navigation}) => (
       name="ViewPost"
       component={ViewScreen}
       options={{
-        title: '',
+        title: 'Journal',
         headerTitleAlign: 'center',
         headerStyle: {
           backgroundColor: '#2e64e515',
