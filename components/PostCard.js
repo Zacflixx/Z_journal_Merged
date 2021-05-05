@@ -81,8 +81,8 @@ const PostCard = ({navigation, item, onDelete, onView, onPress}) => {
           <PostTime>{moment(item.postTime.toDate()).fromNow()}</PostTime>
         </UserInfoText>
       </UserInfo>
-      <View style={{flexDirection: 'row'}}>
-        <PostText style={{color: '#fffdf7', height: 42, width: 120}}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <PostText style={{color: '#fffdf7', height: 44, width: 120}}>
           {item.post}
         </PostText>
         <InteractionWrapper style={{flexDirection: 'row'}}>

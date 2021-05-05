@@ -27,7 +27,7 @@ import firestore from '@react-native-firebase/firestore';
 import {View, Image, ScrollView, Alert} from 'react-native';
 
 const ViewScreen = ({route: {params}}, props, item) => {
-  const {postView, meth, immg, wan, wann, onDelete1} = params;
+  const {postView, meth, immg, wan, wann, jac} = params;
   const {user, logout} = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
 
@@ -129,22 +129,48 @@ const ViewScreen = ({route: {params}}, props, item) => {
       <View
         style={{
           flexDirection: 'row',
-          marginTop: 10,
           alignSelf: 'center',
+          marginTop: 10,
+          marginLeft: 190,
+
+          borderStyle: 'dashed',
+          borderRadius: 9,
+          borderWidth: 0.6,
+          borderColor: 'black',
+          borderTopColor: 'white',
         }}>
-        <PostText style={{color: 'black', fontSize: 40}}>My post</PostText>
+        <PostText
+          style={{
+            color: 'black',
+            fontSize: 22,
+            opacity: 0.8,
+          }}>
+          Z~Journal
+        </PostText>
       </View>
-      <View style={{flexDirection: 'row', marginTop: 40}}>
+
+      <View style={{flexDirection: 'row', marginTop: 9}}>
+        <PostText style={{color: 'black', fontSize: 23}}>{postView}</PostText>
+      </View>
+
+      <ProgressiveImage
+        source={{
+          uri: meth,
+        }}
+        style={{width: '100%', height: 360}}
+        resizeMode="cover"
+      />
+      <View
+        style={{
+          flexDirection: 'row',
+          flex: 1,
+          marginLeft: 90,
+        }}>
+        <PostTime style={{color: 'black', fontSize: 21, opacity: 0.7}}>
+          {moment(jac.toDate()).fromNow()}
+        </PostTime>
         <UserInfo style={{}}>
-          <UserImg
-            source={{
-              uri: userData
-                ? userData.immg ||
-                  'https://png.pngitem.com/pimgs/s/168-1689599_male-user-filled-icon-user-icon-100-x.png'
-                : 'https://png.pngitem.com/pimgs/s/168-1689599_male-user-filled-icon-user-icon-100-x.png',
-            }}
-          />
-          <InteractionWrapper style={{flexDirection: 'row'}}>
+          <InteractionWrapper>
             {/* <Interaction active={item.liked}>
               <Ionicons name={likeIcon} size={25} color={likeIconColor} />
               <InteractionText active={item.liked}>{likeText}</InteractionText>
@@ -153,8 +179,10 @@ const ViewScreen = ({route: {params}}, props, item) => {
               <Ionicons name="md-chatbubble-outline" size={25} />
             </Interaction> */}
             {user.uid == wan ? (
-              <Interaction onPress={() => handleDelete(wann)}>
-                <Ionicons name="md-trash-bin" size={25} color="#383426" />
+              <Interaction
+                style={{marginBottom: 0}}
+                onPress={() => handleDelete(wann)}>
+                <Ionicons name="md-trash-bin" size={27} color="#383426" />
               </Interaction>
             ) : null}
           </InteractionWrapper>
@@ -168,16 +196,7 @@ const ViewScreen = ({route: {params}}, props, item) => {
             <PostTime>{moment(item.postTime.toDate()).fromNow()}</PostTime>
           </UserInfoText> */}
         </UserInfo>
-        <PostText style={{color: 'black', fontSize: 20}}>{postView}</PostText>
       </View>
-
-      <ProgressiveImage
-        source={{
-          uri: meth,
-        }}
-        style={{width: '100%', height: 360}}
-        resizeMode="cover"
-      />
     </ScrollView>
   );
 };

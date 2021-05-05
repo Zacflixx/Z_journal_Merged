@@ -179,13 +179,16 @@ const Homescreen = ({navigation, route}) => {
             item={item}
             onDelete={handleDelete}
             onView={() =>
-              navigation.navigate('ViewPost', {
-                postView: item.post,
-                meth: item.postImg,
-
-                wan: item.userId,
-                wann: item.id,
-              })
+              navigation.navigate(
+                'ViewPost',
+                {
+                  postView: item.post,
+                  meth: item.postImg,
+                  jac: item.postTime,
+                  wan: item.userId,
+                },
+                item.id,
+              )
             }
           />
         ))}
