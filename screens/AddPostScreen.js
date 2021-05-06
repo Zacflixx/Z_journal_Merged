@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Alert,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -140,8 +141,6 @@ const AddPostScreen = () => {
   return (
     <View style={styles.container}>
       <InputWrapper>
-        {image != null ? <AddImage source={{uri: image}} /> : null}
-
         <InputField
           placeholder="What's on your mind?"
           placeholderTextColor="#635935"
@@ -154,61 +153,67 @@ const AddPostScreen = () => {
             borderWidth: 5,
             borderRadius: 15,
             color: '#c4ae66',
-            marginTop: 90,
           }}
         />
+        {image != null ? <AddImage source={{uri: image}} /> : null}
+      </InputWrapper>
+      <View
+        style={{
+          color: 'red',
+          flexDirection: 'column',
+          marginBottom: 100,
+          justifyContent: 'space-evenly',
+        }}>
+        <ActionButton style={{marginLeft: 300}} buttonColor="#c4ae66">
+          <ActionButton.Item
+            buttonColor="#c4ae66"
+            title="Take Photo"
+            onPress={takePhotoFromCamera}>
+            <Icon name="camera-outline" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+          <ActionButton.Item
+            buttonColor="#c4ae66"
+            title="Choose Photo"
+            onPress={choosePhotoFromLibrary}>
+            <Icon name="md-images-outline" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+        </ActionButton>
+
         {uploading ? (
           <StatusWrapper>
             <Text>{transferred} % Completed!</Text>
             <ActivityIndicator size="large" color="#c4ae66" />
           </StatusWrapper>
         ) : (
-          <SubmitBtn
-            style={{color: '#c4ae66', backgroundColor: 'black'}}
+          <TouchableOpacity
+            style={{
+              color: 'red',
+              backgroundColor: '#c4ae66',
+              height: 20,
+              width: 145,
+            }}
             onPress={submitPost}>
-            <SubmitBtnText
+            <Text
               style={{
-                color: '#c4ae66',
-                backgroundColor: 'black',
-                // marginTop: 100,
-                // marginRight: 180,
-                borderColor: '#c4ae66',
-                borderRadius: 6,
-                borderWidth: 2,
-                // borderStyle: 'dotted',
+                color: 'black',
+                backgroundColor: '#c4ae66',
+                fontSize: 25,
+                borderRadius: 30,
               }}>
               ~Post Now~
-            </SubmitBtnText>
-          </SubmitBtn>
+            </Text>
+          </TouchableOpacity>
         )}
-      </InputWrapper>
-      <ActionButton
-        style={{
-          marginBottom: 130,
-          marginRight: 70,
-        }}
-        buttonColor="#c4ae66">
-        <ActionButton.Item
-          buttonColor="#c4ae66"
-          title="Take Photo"
-          onPress={takePhotoFromCamera}>
-          <Icon name="camera-outline" style={styles.actionButtonIcon} />
-        </ActionButton.Item>
-        <ActionButton.Item
-          buttonColor="#c4ae66"
-          title="Choose Photo"
-          onPress={choosePhotoFromLibrary}>
-          <Icon name="md-images-outline" style={styles.actionButtonIcon} />
-        </ActionButton.Item>
-      </ActionButton>
-      <Text
-        style={{
-          marginBottom: 140,
-          marginLeft: 155,
-          color: '#c4ae66',
-        }}>
-        Add Image
-      </Text>
+        <Text
+          style={{
+            color: 'white',
+            fontSize: 15,
+            borderRadius: 30,
+            marginLeft: 192,
+          }}>
+          Add Image
+        </Text>
+      </View>
     </View>
   );
 };

@@ -59,14 +59,16 @@ const PostCard = ({navigation, item, onDelete, onView, onPress}) => {
         borderColor: 'black',
         borderRadius: 20,
         width: '50%',
-        height: 170,
+        height: 180,
         opacity: 0.9,
+        marginBottom: 0,
       }}>
-      <UserInfo style={{}}>
+      <UserInfo style={{justifyContent: 'space-between'}}>
         <UserImg
+          style={{width: '45%', height: 60}}
           source={{
             uri: userData
-              ? userData.userImg ||
+              ? item.postImg ||
                 'https://png.pngitem.com/pimgs/s/168-1689599_male-user-filled-icon-user-icon-100-x.png'
               : 'https://png.pngitem.com/pimgs/s/168-1689599_male-user-filled-icon-user-icon-100-x.png',
           }}
@@ -81,11 +83,15 @@ const PostCard = ({navigation, item, onDelete, onView, onPress}) => {
           <PostTime>{moment(item.postTime.toDate()).fromNow()}</PostTime>
         </UserInfoText>
       </UserInfo>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <PostText style={{color: '#fffdf7', height: 44, width: 120}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          flex: 1,
+        }}>
+        <PostText style={{color: '#fffdf7', height: 74, width: 120}}>
           {item.post}
         </PostText>
-        <InteractionWrapper style={{flexDirection: 'row'}}>
+        <InteractionWrapper style={{flexDirection: 'row', marginRight: 80}}>
           {/* <Interaction active={item.liked}>
               <Ionicons name={likeIcon} size={25} color={likeIconColor} />
               <InteractionText active={item.liked}>{likeText}</InteractionText>
@@ -97,13 +103,13 @@ const PostCard = ({navigation, item, onDelete, onView, onPress}) => {
             <Interaction
               item={item}
               onPress={() => onView({immg: userData.userImg})}>
-              <Ionicons name="ios-eye" size={30} color="#383426" />
+              <Ionicons style={{}} name="ios-eye" size={30} color="#383426" />
             </Interaction>
           ) : null}
         </InteractionWrapper>
       </View>
       {/* {item.postImg != null ? <PostImg source={{uri: item.postImg}} /> : */}
-      <Divider />
+      {/* <Divider />
       {item.postImg != null ? (
         <ProgressiveImage
           defaultImageSource={require('../assets/default-img.jpg')}
@@ -113,7 +119,7 @@ const PostCard = ({navigation, item, onDelete, onView, onPress}) => {
         />
       ) : (
         <Divider />
-      )}
+      )} */}
     </Card>
   );
 };
