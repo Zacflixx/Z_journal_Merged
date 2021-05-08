@@ -7,6 +7,7 @@ import {
   Alert,
   ActivityIndicator,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -150,35 +151,54 @@ const AddPostScreen = () => {
           onChangeText={(content) => setPost(content)}
           style={{
             borderColor: '#c4ae66',
-            borderWidth: 5,
+            borderWidth: 3,
             borderRadius: 15,
             color: '#c4ae66',
           }}
         />
-        {image != null ? <AddImage source={{uri: image}} /> : null}
+        {image != null ? (
+          <AddImage style={styles.imgg} source={{uri: image}} />
+        ) : null}
       </InputWrapper>
+      <ActionButton
+        style={{
+          // backgroundColor: 'red',
+          height: 220,
+          width: '30%',
+          alignSelf: 'center',
+          marginTop: 280,
+          marginLeft: 250,
+        }}
+        buttonColor="#c4ae66">
+        <ActionButton.Item
+          buttonColor="#c4ae66"
+          title="Take Photo"
+          onPress={takePhotoFromCamera}>
+          <Icon name="camera-outline" style={styles.actionButtonIcon} />
+        </ActionButton.Item>
+        <ActionButton.Item
+          buttonColor="#c4ae66"
+          title="Choose Photo"
+          onPress={choosePhotoFromLibrary}>
+          <Icon name="md-images-outline" style={styles.actionButtonIcon} />
+        </ActionButton.Item>
+      </ActionButton>
       <View
         style={{
           color: 'red',
           flexDirection: 'column',
           marginBottom: 100,
-          justifyContent: 'space-evenly',
+          // justifyContent: 'space-evenly',
         }}>
-        <ActionButton style={{marginLeft: 300}} buttonColor="#c4ae66">
-          <ActionButton.Item
-            buttonColor="#c4ae66"
-            title="Take Photo"
-            onPress={takePhotoFromCamera}>
-            <Icon name="camera-outline" style={styles.actionButtonIcon} />
-          </ActionButton.Item>
-          <ActionButton.Item
-            buttonColor="#c4ae66"
-            title="Choose Photo"
-            onPress={choosePhotoFromLibrary}>
-            <Icon name="md-images-outline" style={styles.actionButtonIcon} />
-          </ActionButton.Item>
-        </ActionButton>
-
+        {/* <Text
+          style={{
+            color: '#c4ae66',
+            fontSize: 15,
+            borderRadius: 30,
+            marginLeft: 200,
+          }}>
+          Add Image
+        </Text> */}
         {uploading ? (
           <StatusWrapper>
             <Text>{transferred} % Completed!</Text>
@@ -191,6 +211,7 @@ const AddPostScreen = () => {
               backgroundColor: '#c4ae66',
               height: 20,
               width: 145,
+              marginRight: 100,
             }}
             onPress={submitPost}>
             <Text
@@ -204,15 +225,6 @@ const AddPostScreen = () => {
             </Text>
           </TouchableOpacity>
         )}
-        <Text
-          style={{
-            color: 'white',
-            fontSize: 15,
-            borderRadius: 30,
-            marginLeft: 192,
-          }}>
-          Add Image
-        </Text>
       </View>
     </View>
   );
@@ -230,5 +242,10 @@ const styles = StyleSheet.create({
     fontSize: 28,
     height: 22,
     color: 'white',
+  },
+  imgg: {
+    height: 80,
+    width: 150,
+    marginLeft: 200,
   },
 });
