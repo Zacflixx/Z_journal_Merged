@@ -179,33 +179,17 @@ const Homescreen = ({navigation, route}) => {
             item={item}
             onDelete={handleDelete}
             onView={() =>
-              navigation.navigate(
-                'ViewPost',
-                {
-                  postView: item.post,
-                  meth: item.postImg,
-                  jac: item.postTime,
-                  wan: item.userId,
-                },
-                item.id,
-              )
+              navigation.navigate('ViewPost', {
+                postView: item.post,
+                meth: item.postImg,
+                jac: item.postTime,
+                delItem: item.id,
+                wan: item.userId,
+                pimg: postImg,
+              })
             }
           />
         ))}
-        {/* <View>
-          <Text style={{color: 'red', fontSize: 55}}> this is not me </Text>
-          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
-          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
-          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
-          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
-          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
-          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
-          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
-          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
-          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
-          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
-          <Text style={{color: 'red', fontSize: 55}}> this is me </Text>
-        </View> */}
       </ScrollView>
     </SafeAreaView>
   );

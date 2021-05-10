@@ -27,7 +27,7 @@ import firestore from '@react-native-firebase/firestore';
 import {View} from 'react-native';
 import ViewScreen from '../screens/ViewScreen';
 
-const PostCard = ({navigation, item, onDelete, onView, onPress}) => {
+const PostCard = ({navigation, item, onBack, onView, onPress}) => {
   const {user, logout} = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
 
@@ -100,9 +100,7 @@ const PostCard = ({navigation, item, onDelete, onView, onPress}) => {
               <Ionicons name="md-chatbubble-outline" size={25} />
             </Interaction> */}
           {user.uid == item.userId ? (
-            <Interaction
-              item={item}
-              onPress={() => onView({immg: userData.userImg})}>
+            <Interaction item={item} onPress={() => onView({delItem: item.id})}>
               <Ionicons style={{}} name="ios-eye" size={30} color="#383426" />
             </Interaction>
           ) : null}

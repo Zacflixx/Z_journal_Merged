@@ -14,7 +14,7 @@ import AddPostScreen from '../screens/AddPostScreen';
 import MessagesScreen from '../screens/MessagesScreen';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import PostCard from '../components/PostCard';
-
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -46,7 +46,6 @@ const FeedStack = ({navigation}) => (
               size={25}
               backgroundColor="black"
               color="#c4ae66"
-              onPress={() => navigation.navigate('ViewPost')}
             />
           </View>
         ),
@@ -204,8 +203,8 @@ const ProfileStack = ({navigation}) => (
 
 const AppStack = () => {
   const getTabBarVisibility = (route) => {
-    const routeName = route.state
-      ? route.state.routes[route.state.index].name
+    const routeName = route.getFocusedRouteNameFromRoute
+      ? route.state.routes[route.getFocusedRouteNameFromRoute.index].name
       : '';
 
     if (routeName === 'Chat') {

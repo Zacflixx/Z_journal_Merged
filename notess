@@ -1,0 +1,21 @@
+ const getTabBarVisibility = (route) => {
+    const routeName = route.getFocusedRouteNameFromRoute
+      ? route.state.routes[route.getFocusedRouteNameFromRoute.index].name
+      : '';
+
+    if (routeName === 'Chat') {
+      return false;
+    }
+    return true;
+  };
+
+    const getTabBarVisibility = (route) => {
+    const routeName = route.state
+      ? route.state.routes[route.state.index].name
+      : '';
+
+    if (routeName === 'Chat') {
+      return false;
+    }
+    return true;
+  };
