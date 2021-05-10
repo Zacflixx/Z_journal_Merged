@@ -20,14 +20,19 @@ import {
 import ProgressiveImage from '../components/ProgressiveImage';
 
 import {AuthContext} from '../navigation/AuthProvider';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
+
+import HomeScreen from '../screens/HomeScreen';
 
 import moment from 'moment';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import firestore from '@react-native-firebase/firestore';
 import {View, Image, ScrollView, Alert} from 'react-native';
 
-const ViewScreen = ({route: {params}}, props, item) => {
-  const {postView, meth, immg, wan, wann, jac} = params;
+const ViewScreen = ({route: {params}}, navigation, props, item) => {
+  const {postView, meth, pimg, wan, delItem, jac, NewId} = params;
   const {user, logout} = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
 
@@ -47,7 +52,8 @@ const ViewScreen = ({route: {params}}, props, item) => {
   useEffect(() => {
     getUser();
   }, []);
-  const handleDelete = (postId) => {
+
+  const handleDelete = (delItem) => {
     Alert.alert(
       'Delete post',
       'Are you sure?',
@@ -59,48 +65,48 @@ const ViewScreen = ({route: {params}}, props, item) => {
         },
         {
           text: 'Confirm',
-          onPress: () => deletePost(postId),
+          onPress: () => deletePost(delItem),
         },
       ],
       {cancelable: false},
     );
   };
-  const deletePost = (postId) => {
-    console.log('Current Post Id: ', postId);
+  const deletePost = (delItem) => {
+    console.log('Current Post Id: ', delItem);
 
     firestore()
       .collection('posts')
-      .doc(postId)
+      .doc(delItem)
       .get()
       .then((documentSnapshot) => {
         if (documentSnapshot.exists) {
-          const {postImg} = documentSnapshot.data();
+          const {pimg} = documentSnapshot.data();
 
-          if (postImg != null) {
-            const storageRef = storage().refFromURL(postImg);
+          if (pimg != null) {
+            const storageRef = storage().refFromURL(pimg);
             const imageRef = storage().ref(storageRef.fullPath);
 
             imageRef
               .delete()
               .then(() => {
-                console.log(`${postImg} has been deleted successfully.`);
-                deleteFirestoreData(postId);
+                console.log(`${pimg} has been deleted successfully.`);
+                deleteFirestoreData(NewId);
               })
               .catch((e) => {
                 console.log('Error while deleting the image. ', e);
               });
             // If the post image is not available
           } else {
-            deleteFirestoreData(postId);
+            deleteFirestoreData(delItem);
           }
         }
       });
   };
 
-  const deleteFirestoreData = (postId) => {
+  const deleteFirestoreData = (delItem) => {
     firestore()
       .collection('posts')
-      .doc(postId)
+      .doc(delItem)
       .delete()
       .then(() => {
         Alert.alert(
@@ -181,8 +187,24 @@ const ViewScreen = ({route: {params}}, props, item) => {
             {user.uid == wan ? (
               <Interaction
                 style={{marginBottom: 0}}
-                onPress={() => handleDelete(wann)}>
+                onPress={() => handleDelete(delItem)}>
                 <Ionicons name="md-trash-bin" size={27} color="#383426" />
+              </Interaction>
+            ) : null}
+          </InteractionWrapper>
+          <InteractionWrapper>
+            {/* <Interaction active={item.liked}>
+              <Ionicons name={likeIcon} size={25} color={likeIconColor} />
+              <InteractionText active={item.liked}>{likeText}</InteractionText>
+            </Interaction> */}
+            {/* <Interaction>
+              <Ionicons name="md-chatbubble-outline" size={25} />
+            </Interaction> */}
+            {user.uid == wan ? (
+              <Interaction
+                style={{marginBottom: 0}}
+                onPress={() => navigation.navigate('HomeScreen')}>
+                <Ionicons name="md-trash-bin" size={47} color="blue" />
               </Interaction>
             ) : null}
           </InteractionWrapper>
