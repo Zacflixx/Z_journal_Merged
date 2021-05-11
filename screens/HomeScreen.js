@@ -185,7 +185,6 @@ const Homescreen = ({navigation, route}) => {
                 jac: item.postTime,
                 delItem: item.id,
                 wan: item.userId,
-                pimg: postImg,
               })
             }
           />

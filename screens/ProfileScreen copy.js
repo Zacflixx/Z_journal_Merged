@@ -155,6 +155,10 @@ const ProfileScreen = ({navigation, route}) => {
             <Text style={styles.userInfoSubTitle}>Following</Text>
           </View>
         </View>
+
+        {posts.map((item) => (
+          <PostCard key={item.id} item={item} onDelete={handleDelete} />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
@@ -165,19 +169,15 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#c4ae66',
+    backgroundColor: '#bd9a44',
     borderColor: 'black',
     borderWidth: 8,
     padding: 20,
   },
   userImg: {
-    height: 180,
-    width: 200,
-    // marginLeft: 170,
-    marginTop: 60,
-    borderRadius: 9,
-    borderWidth: 3,
-    borderColor: 'black',
+    height: 150,
+    width: 150,
+    borderRadius: 75,
   },
   userName: {
     fontSize: 18,

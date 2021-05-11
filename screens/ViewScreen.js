@@ -39,7 +39,7 @@ const ViewScreen = ({route: {params}}, navigation, props, item) => {
   const getUser = async () => {
     await firestore()
       .collection('users')
-      .doc(item.userId)
+      .doc(wan)
       .get()
       .then((documentSnapshot) => {
         if (documentSnapshot.exists) {
@@ -192,14 +192,14 @@ const ViewScreen = ({route: {params}}, navigation, props, item) => {
               </Interaction>
             ) : null}
           </InteractionWrapper>
-          <InteractionWrapper>
-            {/* <Interaction active={item.liked}>
+          {/* <InteractionWrapper>
+             <Interaction active={item.liked}>
               <Ionicons name={likeIcon} size={25} color={likeIconColor} />
               <InteractionText active={item.liked}>{likeText}</InteractionText>
-            </Interaction> */}
-            {/* <Interaction>
+            </Interaction> 
+           <Interaction>
               <Ionicons name="md-chatbubble-outline" size={25} />
-            </Interaction> */}
+            </Interaction> 
             {user.uid == wan ? (
               <Interaction
                 style={{marginBottom: 0}}
@@ -208,15 +208,7 @@ const ViewScreen = ({route: {params}}, navigation, props, item) => {
               </Interaction>
             ) : null}
           </InteractionWrapper>
-          {/* <UserInfoText style={{color: 'black'}}>
-            <TouchableOpacity onPress={onPress}>
-              <UserName style={{color: 'black'}}>
-                {userData ? userData.fname || 'Z-Journal' : 'Z-Journal'}{' '}
-                {userData ? userData.lname || 'User' : 'User'}
-              </UserName>
-            </TouchableOpacity>
-            <PostTime>{moment(item.postTime.toDate()).fromNow()}</PostTime>
-          </UserInfoText> */}
+          */}
         </UserInfo>
       </View>
     </ScrollView>
